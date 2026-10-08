@@ -1,0 +1,6 @@
+name: artifact-validator
+version: "1.0.0"
+description: "Read-only local Markdown script word-count, timing and metadata checks. No network, shell, database writes or rendering."
+author: Personal Brand OS
+provides_tools:
+  - brand_artifact_check

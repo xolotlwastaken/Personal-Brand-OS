@@ -1,0 +1,591 @@
+{
+  "upstream": {
+    "url": "https://github.com/Ootto-AI/claude-content-skills",
+    "revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+    "license": "MIT"
+  },
+  "skills": [
+    {
+      "name": "analytics-readout",
+      "profiles": [
+        "brand-ceo"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "c71b89a2645ffe099900ce75b5611c8d37724c130ff29f8b988c671e2ad07803",
+      "adapted_sha256": "a74588869d84396dc90ca6b308df9dc19d3547360912f3c53ef132491cbccf68",
+      "declared_dependencies": [
+        "Ootto MCP"
+      ],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "content-audit",
+      "profiles": [
+        "brand-ceo"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "d18379b193f974e5335afbc2dab6724a55a37f07b0e8b7c0806e806951364e45",
+      "adapted_sha256": "023cc6be8babd8c296d12443436c46d0066942c0434fa6e2fdb337983f7c7ea6",
+      "declared_dependencies": [
+        "Ootto MCP"
+      ],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "content-calendar",
+      "profiles": [
+        "brand-ceo",
+        "brand-manager"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "880e23d399676f05375e2a067b42ce6333f4d7015bb66bd80d2c47cc4d6f938b",
+      "adapted_sha256": "bfb8a3f45a1a07de704d18736653d48126dd33bd24d69ea5bfdd56faa2c6f7a6",
+      "declared_dependencies": [
+        "Filesystem MCP"
+      ],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "ai-brain",
+      "profiles": [
+        "brand-manager"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "19a3bd57503236efed6dc229f3a716a0475cee21d283d0e1f455cfd3a6d519a8",
+      "adapted_sha256": "08acdbf098fec23e04111a2144937e3d8a70e244bb7c1182e01725d8ff51062b",
+      "declared_dependencies": [
+        "Filesystem MCP"
+      ],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "audience-personas",
+      "profiles": [
+        "brand-manager"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "8c04c6b4f61389538596bee7efece824092be6ac479066b3d520fd764fb8614a",
+      "adapted_sha256": "e8be19543d60e37d1e47de4e63767c8c349981df963c3a812dfe18be047ca16b",
+      "declared_dependencies": [],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "positioning-audit",
+      "profiles": [
+        "brand-manager"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "2bcabec33818a897aa9e7ef7c64f68c7d8c22ada3ec36ad84f4674c42dbc35da",
+      "adapted_sha256": "79a7a720c885f6e4a047d2df1b0ff594d00155542356c8bfb97154b834b4a86d",
+      "declared_dependencies": [],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "content-pillar-builder",
+      "profiles": [
+        "brand-manager"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "fed2ae9f1581275d95ba4214b8642b2f262931cdde07ccf257db156638ffec27",
+      "adapted_sha256": "96ff7361f49d8869cd593ed51342bad8eb68b984a9bdb25879db882ca95d6f6e",
+      "declared_dependencies": [],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "series-planner",
+      "profiles": [
+        "brand-manager"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "014e245d3eb7c528b630a10aae2b967b1075a1beb3c5e460951b3f56c12ff8ea",
+      "adapted_sha256": "e86876dc1472cb501f0af506489aaee215c436d02ff0a37d6fe91835caf78b37",
+      "declared_dependencies": [],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "reel-analyzer",
+      "profiles": [
+        "reference-builder"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "4bae0a578fd3299f2f4bd805c1c56eab7a9d2731ee0a0811c8dc9dcc8284cdfd",
+      "adapted_sha256": "af12e2afd853424e0e6bf1da9871dd48ded95310dde4f401388787d524937383",
+      "declared_dependencies": [
+        "agent-reach"
+      ],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "competitor-teardown",
+      "profiles": [
+        "reference-builder"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "f4fe0b1aab06c27b41a51676d96d8e61beda85be0e47a60c12439d8739914c4c",
+      "adapted_sha256": "680d24af5736aa3d65eac73242c59f2763ad373e0dc8d759d94ce32099a2e8b4",
+      "declared_dependencies": [
+        "agent-reach"
+      ],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "trend-spotter",
+      "profiles": [
+        "reference-builder"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "9b2c95b5061f8cb4b0acb9551160429adf33b63abca6214a5a1eb5fb998724ad",
+      "adapted_sha256": "692aa23bb30d9297c90ba1723b5a3c63f71694eb3c3ba7a6ccc8f55bb2f5672a",
+      "declared_dependencies": [
+        "Ootto MCP",
+        "agent-reach"
+      ],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "comment-mining",
+      "profiles": [
+        "reference-builder"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "c20be227fbce88401c8be097d67e21759dd80714e8c3ad12b817bb86210cdef0",
+      "adapted_sha256": "0f1595fddf6ddd10b22d8299bf0eb96cf7b622e3f9ec3dd3a2684e4db866a362",
+      "declared_dependencies": [
+        "Ootto MCP"
+      ],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "going-viral",
+      "profiles": [
+        "hook-writer"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "ea2d7c80d00ad83ec8f0cacefb7180408c98f8da5fddd2675dd6cef8ef890b5a",
+      "adapted_sha256": "16a101cfd9b98a33d885c15b81b569955ede1c5f0ac69b4e90f4c7f20ff0d9f8",
+      "declared_dependencies": [
+        "agent-reach"
+      ],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "hook-mining",
+      "profiles": [
+        "hook-writer"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "f4cd44bccbca3502ed1a766e02259bf88bfc9c39b8f7d8223e4663a48d4c81ee",
+      "adapted_sha256": "7522df6f7d929ac30c558098d21604716b9d8f21ba607459a64accfac92f5ef7",
+      "declared_dependencies": [
+        "agent-reach",
+        "Sandcastles"
+      ],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools",
+        "Python stdlib helper (operator only)"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "stdlib-only CSV/JSON parser, reviewed before selftest",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "viral-hook-writer",
+      "profiles": [
+        "hook-writer"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "33996d5c5924d843f1773abbc4248ead047b7c3966bd3a4689db8e521074f702",
+      "adapted_sha256": "3c50a0101ee4a6ad3d4c7135aa77672ee636f50ce435e7899563032d034c9dfa",
+      "declared_dependencies": [
+        "Filesystem MCP"
+      ],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "ab-hook-tester",
+      "profiles": [
+        "hook-writer"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "1dcfec629e7dc2365e8ebd28b6b917f7358420307f0c093377989519dd65139f",
+      "adapted_sha256": "0597f94f4262daeba9c32aa9a42fe275ce7c0f57c137579a7f40927e12a3f001",
+      "declared_dependencies": [],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "reel-scripter",
+      "profiles": [
+        "script-writer"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "ff8be74035bffaebf67ab390c4fadd4e90cd470549a8aa185612b2b817432f20",
+      "adapted_sha256": "d397394268abd2ae6266589e227183a2b8fabaa21c3b791883282c2f59b1a1b4",
+      "declared_dependencies": [
+        "Filesystem MCP"
+      ],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "b-roll-shot-list",
+      "profiles": [
+        "script-writer",
+        "video-editor"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "133ea09c66e0273866076eaa82ec65d43ae4521795b85dfd82dc48b1ff6fd067",
+      "adapted_sha256": "2d922cc0c42b3e6040936f5c1985398ab8854a6820c5d84cf1afa0df174763eb",
+      "declared_dependencies": [],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "cta-writer",
+      "profiles": [
+        "script-writer"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "ef778b45041d46b753a1ec220a4a9417fde213ea9173cf5ee031cf0b2b6343ee",
+      "adapted_sha256": "32a3ccaa44f05d04b0d66e56a4deed076d6196f274d82e88a6fbea0092dc6c7a",
+      "declared_dependencies": [],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "on-screen-text-writer",
+      "profiles": [
+        "script-writer",
+        "video-editor"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "b0880449aaa0fe007b7fff826c2113a2c64427951c5d08e6a703ce67f43e998e",
+      "adapted_sha256": "f2a1173893adb085cf7b5b0b70d1592aad49c20f5d7d9afee03c0e1521fd9b66",
+      "declared_dependencies": [],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "reel-builder",
+      "profiles": [
+        "video-editor"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "d6cef8b90f2629f6ad2ba44818f32153544fd7d8bc41ed989a289cd01ac3af8a",
+      "adapted_sha256": "1a5ca459660b1714120753f7b331b159667e1a3a05c55a5355c693adf010e21c",
+      "declared_dependencies": [
+        "Remotion",
+        "Seedance",
+        "Runway"
+      ],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "cover-thumbnail-brief",
+      "profiles": [
+        "video-editor"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "7bcf373ae5edf2a420765b3d2cbc0be7ccfe28de5dbcd4673ae0c7d8aac2e96f",
+      "adapted_sha256": "4cf8dfb753c48d705aa09fc6e796572871de4b43e2b984931e1f7468451dd5ea",
+      "declared_dependencies": [],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "caption-and-hashtags",
+      "profiles": [
+        "publisher"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "b0ecf046a871cce883ab6543367ec6fa6f92914cfcd88083180fc8d416106915",
+      "adapted_sha256": "6413fd091d7b319faf7ea7da0a82c38e27010feedcf15ecb75eb7fbc4014c502",
+      "declared_dependencies": [
+        "Filesystem MCP"
+      ],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "best-time-scheduler",
+      "profiles": [
+        "publisher"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "5833040680e42835d72edb450bf3cb391920ec57edc7aa941b9a63b3669592a0",
+      "adapted_sha256": "2a96e12b4d60cd9f71a0f3c760447182335a39f6a57a128928bae4aa686e7442",
+      "declared_dependencies": [],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "comment-responder",
+      "profiles": [
+        "publisher"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "55cdaa189a229ff8216972b63c4ff7e05e78820f1035a557366db3d8db49e8da",
+      "adapted_sha256": "8ff7376fc244378638bac9ac18e364d50362bbb4ee26d6584b954d749a85f7a9",
+      "declared_dependencies": [],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    },
+    {
+      "name": "dm-script-writer",
+      "profiles": [
+        "publisher"
+      ],
+      "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
+      "original_sha256": "e722cd48653864f49e4f2b905207866ceb82e99258debda31c1859ebf1775bfb",
+      "adapted_sha256": "d84d5f6b062147783acd0f73803abc2197314d5a9d3034411b1e2b6e0a02c5e4",
+      "declared_dependencies": [],
+      "runtime_dependencies": [
+        "Hermes file/skills/kanban tools"
+      ],
+      "external_integrations": "disabled",
+      "helper_review": "no executable helpers",
+      "validation": {
+        "directory": "passed",
+        "SKILL.md": "passed",
+        "discovery": "pending runtime verification",
+        "intended_use": "pending; deterministic and live results recorded in data/verification"
+      }
+    }
+  ]
+}

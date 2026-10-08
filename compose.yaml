@@ -1,0 +1,47 @@
+name: personal-brand-os
+services:
+  hermes:
+    image: ${HERMES_IMAGE:-nousresearch/hermes-agent@sha256:9774f4f39a9bb8c2f68ce728ed5e99ddbad282163be56764afacf88ed952b784}
+    restart: unless-stopped
+    command: ["gateway", "run"]
+    # Official init starts as root, aligns IDs, then drops agent services to hermes.
+    # Do not set user:, init:, or replace the entrypoint.
+    environment:
+      HERMES_UID: ${HERMES_UID:-1000}
+      HERMES_GID: ${HERMES_GID:-1000}
+      HERMES_HOME: /opt/data
+      HERMES_WRITE_SAFE_ROOT: /opt/data:/knowledge:/media
+      HERMES_DASHBOARD: "0"
+      API_SERVER_ENABLED: "false"
+      TZ: Asia/Singapore
+      BRAND_MODEL: ${BRAND_MODEL:-nvidia/nemotron-3-ultra-550b-a55b}
+      BRAND_PROVIDER: ${BRAND_PROVIDER:-nvidia}
+      BRAND_BASE_URL: ${BRAND_BASE_URL:-https://integrate.api.nvidia.com/v1}
+    volumes:
+      - ./data/hermes:/opt/data
+      - ./knowledge:/knowledge
+      - ./media:/media
+      - ./scripts:/project/scripts:ro
+      - ./config:/project/config:ro
+      - ./vendor:/project/vendor:ro
+      - ./templates:/project/templates:ro
+    working_dir: /knowledge
+    cap_drop: [ALL]
+    # Required only for upstream init's UID/GID remapping and privilege drop.
+    cap_add: [CHOWN, SETUID, SETGID, DAC_OVERRIDE, FOWNER, KILL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 3g
+    cpus: 2.0
+    pids_limit: 256
+    stop_grace_period: 30s
+    healthcheck:
+      test: ["CMD", "/command/s6-setuidgid", "hermes", "/opt/hermes/.venv/bin/python", "/project/scripts/healthcheck.py"]
+      interval: 30s
+      timeout: 5s
+      start_period: 120s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

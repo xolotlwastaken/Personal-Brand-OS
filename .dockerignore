@@ -1,0 +1,9 @@
+.git
+/.upstream
+/data
+/knowledge
+/media
+/backups
+.env
+.env.*
+__pycache__

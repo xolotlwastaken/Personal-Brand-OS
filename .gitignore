@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+/data/
+/backups/
+/.upstream/
+/knowledge/
+/media/
+__pycache__/
+*.pyc
+*.log

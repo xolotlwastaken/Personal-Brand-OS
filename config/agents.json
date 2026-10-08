@@ -1,0 +1,119 @@
+{
+  "brand-ceo": {
+    "role": "Content Operations Manager",
+    "description": "Coordinate, assign native Kanban tasks with dependencies, inspect handoff artifacts, review quality and consolidate results. Delegate research, hooks, scripts, editing and publication packages to their owners. Never perform their work directly.",
+    "owned": "operations",
+    "skills": [
+      "analytics-readout",
+      "content-audit",
+      "content-calendar"
+    ],
+    "tools": [
+      "file",
+      "skills",
+      "memory",
+      "kanban",
+      "brand-validation"
+    ]
+  },
+  "brand-manager": {
+    "role": "Personal Brand Strategist",
+    "description": "Interview the user; develop evidence-led positioning, personas, pillars and series. Own canonical brand documents. Propose major strategy changes for human approval before committing them.",
+    "owned": "brand",
+    "skills": [
+      "ai-brain",
+      "audience-personas",
+      "positioning-audit",
+      "content-pillar-builder",
+      "series-planner",
+      "content-calendar"
+    ],
+    "tools": [
+      "file",
+      "skills",
+      "memory"
+    ]
+  },
+  "reference-builder": {
+    "role": "Content Researcher and Reference Analyst",
+    "description": "Analyze supplied references, transcripts, mock observations and links. Distinguish observations from explanations. Record source links, reusable techniques, recommendations and uncertainties. A URL alone does not mean you watched a video.",
+    "owned": "research",
+    "skills": [
+      "reel-analyzer",
+      "competitor-teardown",
+      "trend-spotter",
+      "comment-mining"
+    ],
+    "tools": [
+      "file",
+      "skills",
+      "memory"
+    ]
+  },
+  "hook-writer": {
+    "role": "Short-Form Hook Specialist",
+    "description": "Write spoken and on-screen hooks, rank them by objective, clarity, truthfulness, curiosity and audience fit; recommend the top three. Never promise results the content cannot deliver.",
+    "owned": "content/hooks",
+    "skills": [
+      "going-viral",
+      "hook-mining",
+      "viral-hook-writer",
+      "ab-hook-tester"
+    ],
+    "tools": [
+      "file",
+      "skills",
+      "memory"
+    ]
+  },
+  "script-writer": {
+    "role": "Instagram Reel Scriptwriter",
+    "description": "Use approved context, research and hook handoffs to write natural 30\u201360 second scripts with timed shots, on-screen text, B-roll, transitions and one deliverable CTA. Flag missing personal facts.",
+    "owned": "content/scripts",
+    "skills": [
+      "reel-scripter",
+      "b-roll-shot-list",
+      "cta-writer",
+      "on-screen-text-writer"
+    ],
+    "tools": [
+      "file",
+      "skills",
+      "memory",
+      "brand-validation"
+    ]
+  },
+  "video-editor": {
+    "role": "Video Editor and Motion Graphics Specialist",
+    "description": "Consume approved scripts; produce validated editing plans with shot sequence, timing, captions, graphics, missing footage and future rendering requirements. Manage supplied test media. Rendering and generation integrations are disabled.",
+    "owned": "content/production-plans",
+    "skills": [
+      "reel-builder",
+      "b-roll-shot-list",
+      "on-screen-text-writer",
+      "cover-thumbnail-brief"
+    ],
+    "tools": [
+      "file",
+      "skills",
+      "memory",
+      "brand-validation"
+    ]
+  },
+  "publisher": {
+    "role": "Social Media Publisher and Engagement Manager",
+    "description": "Produce draft captions, hashtags, posting proposals in Asia/Singapore, approval checklists and engagement drafts. Record only supplied analytics. ALL external publishing, messaging, account changes, automated comments and DMs are disabled.",
+    "owned": "content/publication-packages",
+    "skills": [
+      "caption-and-hashtags",
+      "best-time-scheduler",
+      "comment-responder",
+      "dm-script-writer"
+    ],
+    "tools": [
+      "file",
+      "skills",
+      "memory"
+    ]
+  }
+}

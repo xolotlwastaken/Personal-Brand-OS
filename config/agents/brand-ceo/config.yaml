@@ -1,0 +1,90 @@
+{
+  "model": {
+    "default": "${BRAND_MODEL}",
+    "provider": "${BRAND_PROVIDER}",
+    "base_url": "${BRAND_BASE_URL}"
+  },
+  "platform_toolsets": {
+    "cli": [
+      "file",
+      "skills",
+      "memory",
+      "kanban",
+      "brand-validation"
+    ],
+    "api_server": [
+      "file",
+      "skills",
+      "memory",
+      "kanban",
+      "brand-validation"
+    ],
+    "telegram": [
+      "file",
+      "skills",
+      "memory",
+      "kanban",
+      "brand-validation"
+    ],
+    "discord": [
+      "file",
+      "skills",
+      "memory",
+      "kanban",
+      "brand-validation"
+    ],
+    "slack": [
+      "file",
+      "skills",
+      "memory",
+      "kanban",
+      "brand-validation"
+    ]
+  },
+  "agent": {
+    "max_turns": 24,
+    "gateway_timeout": 180,
+    "reasoning_effort": "low"
+  },
+  "terminal": {
+    "backend": "local",
+    "cwd": "/knowledge",
+    "home_mode": "profile"
+  },
+  "skills": {
+    "creation_nudge_interval": 0
+  },
+  "memory": {
+    "memory_enabled": true,
+    "user_profile_enabled": true
+  },
+  "kanban": {
+    "auto_decompose": false,
+    "orchestrator_profile": "brand-ceo",
+    "default_assignee": "brand-ceo",
+    "dispatch_in_gateway": true,
+    "dispatch_interval_seconds": 15,
+    "max_in_progress": 1,
+    "max_in_progress_per_profile": 1,
+    "failure_limit": 1,
+    "review_dispatch": false,
+    "dispatch_profiles": [
+      "brand-ceo",
+      "brand-manager",
+      "reference-builder",
+      "hook-writer",
+      "script-writer",
+      "video-editor",
+      "publisher"
+    ]
+  },
+  "tool_loop_guardrails": {
+    "non_interactive_hard_stop_enabled": true
+  },
+  "_config_version": 50,
+  "plugins": {
+    "enabled": [
+      "artifact-validator"
+    ]
+  }
+}

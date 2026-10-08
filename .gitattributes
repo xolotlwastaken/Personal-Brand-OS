@@ -1,0 +1,6 @@
+*.sh text eol=lf
+*.py text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+# Preserve reviewed upstream reference bytes/checksums, including original whitespace.
+vendor/** -text -whitespace
