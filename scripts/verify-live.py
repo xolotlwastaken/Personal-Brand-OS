@@ -43,7 +43,8 @@ smoke=tasks('brand-os-skills');assert len(smoke)==7,smoke;assert all(t['status']
 corrections=tasks('brand-os-skill-revisions')
 if corrections:assert len(corrections)==2 and all(t['status']=='done' for t in corrections),[(t['id'],t['status']) for t in corrections]
 patches=tasks('brand-os-example-patches')
-if patches:assert len(patches)==2 and all(t['status']=='done' for t in patches),[(t['id'],t['status']) for t in patches]
+if patches:
+ assert len(patches)==3 and {t['assignee'] for t in patches}=={'brand-ceo','brand-manager','publisher'} and all(t['status']=='done' for t in patches),[(t['id'],t['status']) for t in patches]
 examples=[]
 for t in smoke:
  t=next((c for c in corrections if c['assignee']==t['assignee']),t)

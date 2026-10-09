@@ -48,8 +48,11 @@ if a.mode in {'backup','secrets'}:
         out=Path(a.output);out.parent.mkdir(parents=True,exist_ok=True)
         if out.exists():raise RuntimeError('Output exists; refusing overwrite')
         with tarfile.open(out,'w:gz') as archive:
-            for f in stage.rglob('*'):
-                if f.is_file() and '.sqlite-input' not in f.parts:archive.add(f,arcname=str(f.relative_to(stage)),recursive=False)
+            # Archive only indexed files: SQLite may create temporary empty WAL/shm
+            # sidecars during integrity checks, which are not part of the snapshot.
+            for entry in index:
+                archive.add(stage/entry['path'],arcname=entry['path'],recursive=False)
+            archive.add(stage/'MANIFEST.json',arcname='MANIFEST.json',recursive=False)
         os.chmod(out,0o600); print(json.dumps({'archive':str(out),'files':len(index),'secrets':a.mode=='secrets'}))
 else:
     dest=Path('/restore')

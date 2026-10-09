@@ -5,10 +5,10 @@ from pathlib import Path
 root=Path('/opt/data');roles=json.loads(Path('/project/config/agents.json').read_text())
 def snapshot():
     files={}
-    selected=list(Path('/knowledge').rglob('*.md'))+list(Path('/media').rglob('*'))
+    selected=[root/'config.yaml']+list(Path('/knowledge').rglob('*.md'))+list(Path('/media').rglob('*'))
     for name in roles:
         p=root/'profiles'/name
-        selected += [p/'config.yaml',p/'profile.yaml',p/'SOUL.md']
+        selected += [p/'config.yaml',p/'profile.yaml',p/'SOUL.md',p/'.env']
         selected += list((p/'skills').rglob('*'))+list((p/'memories').rglob('*'))+list((p/'sessions').rglob('*'))+list((p/'plugins').rglob('*.py'))
     for p in selected:
         if p.is_file() and '__pycache__' not in p.parts:

@@ -54,7 +54,7 @@ for name,method in methods.items():
  if name=='hook-mining':
   shutil.copy2(src/'mine_hooks.py',target/'mine_hooks.py')
   with (target/'SKILL.md').open('a') as f:f.write('\nThe host operator can run the reviewed helper inside Docker: `python /opt/data/profiles/hook-writer/skills/hook-mining/mine_hooks.py <supplied.csv>`. The agent has no general terminal tool; it can inspect CSV with file tools.\n')
- manifest['skills'].append({'name':name,'profiles':[p for p,r in roles.items() if name in r[3].split()],'source_revision':rev,'original_sha256':hashlib.sha256((src/'SKILL.md').read_bytes()).hexdigest(),'adapted_sha256':hashlib.sha256((target/'SKILL.md').read_bytes()).hexdigest(),'declared_dependencies':services,'runtime_dependencies':['Hermes file/skills/kanban tools']+(['Python stdlib helper (operator only)'] if name=='hook-mining' else []),'external_integrations':'disabled','helper_review':'stdlib-only CSV/JSON parser, reviewed before selftest' if name=='hook-mining' else 'no executable helpers','validation':{'directory':'passed','SKILL.md':'passed','discovery':'pending runtime verification','intended_use':'pending; deterministic and live results recorded in data/verification'}})
+ manifest['skills'].append({'name':name,'profiles':[p for p,r in roles.items() if name in r[3].split()],'source_revision':rev,'original_sha256':hashlib.sha256((src/'SKILL.md').read_bytes()).hexdigest(),'adapted_sha256':hashlib.sha256((target/'SKILL.md').read_bytes()).hexdigest(),'declared_dependencies':services,'runtime_dependencies':['Hermes file/skills/kanban tools']+(['Python stdlib helper (operator only)'] if name=='hook-mining' else []),'external_integrations':'disabled','helper_review':'stdlib-only CSV/JSON parser, reviewed before selftest' if name=='hook-mining' else 'no executable helpers','validation':{'directory':'passed','SKILL.md':'passed','discovery':'pending runtime verification','intended_use':'pending; deterministic and live results recorded in data/hermes/verification'}})
 (root/'config/skills-manifest.yaml').write_text(json.dumps(manifest,indent=2)+'\n')
 for profile,(title,desc,owned,skills) in roles.items():
  path=root/'config/agents'/profile;path.mkdir(parents=True,exist_ok=True)
@@ -90,6 +90,8 @@ Human must approve publication, DMs, irreversible actions, major strategy change
 
 {', '.join(skills.split())}
 '''
+ if profile=='publisher':
+  soul+='\n## Resource and personal-claim gate\n\nNever write first-person resource ownership or quantified time/result claims without supplied evidence. Bracket missing resources in EVERY reply, caption and DM draft. A short overview is not a copy-paste prompt pack. Do not promise unavailable resource delivery. Proposed cadence is a hypothesis; changes to the user daily-Reel goal require human approval.\n'
  if profile=='brand-ceo':soul+='''
 ## Native orchestration
 

@@ -45,7 +45,7 @@ Backups remain private: transcripts and vault notes can contain private informat
 ./scripts/restore.sh backups/<archive>.tar.gz data/recovery-test
 ```
 
-Restore rejects a nonempty target, unsafe paths/links, checksum mismatches and corrupt SQLite. It leaves the original installation untouched. Restored folders are recovery-test/hermes, recovery-test/knowledge and recovery-test/media. No credentials are in the normal backup.
+Restore rejects a nonempty target, unsafe paths/links, duplicate/unindexed members, checksum mismatches and corrupt SQLite. It leaves the original installation untouched. To additionally test native reprovisioning/history access in the disposable restore, run `./scripts/verify-restored.sh data/recovery-test`; it uses a network-disabled one-off official container and does no model inference. Restored folders are recovery-test/hermes, recovery-test/knowledge and recovery-test/media. No credentials are in the normal backup.
 
 On another server:
 
@@ -67,3 +67,24 @@ Worker PIDs/leases from the old machine are not portable active processes. The n
 ## Updates
 
 `./scripts/update.sh` with no argument shows the current pin. To apply a separately reviewed official release use `./scripts/update.sh nousresearch/hermes-agent@sha256:<digest>`. It validates/pulls the digest before changing state, makes a safe backup, saves the old deployment .env under data/, then replaces the image, reconciles config and verifies. Bootstrap waits up to 180 seconds for healthy startup before verification. Do not run hermes update inside a running container. A newly changed config schema may need explicit migration review. If an upgrade fails, retain its logs, restore the previous pin and recover the pre-update backup into an empty location before replacing state; do not overwrite SQLite blindly.
+
+## Transfer the local repository bundle
+
+No remote Git repository was published by this setup. Transfer `backups/personal-brand-os.bundle` and the verified state archive through your chosen secure channel. On the new server:
+
+```bash
+git clone /secure-transfer/personal-brand-os.bundle personal-brand-os
+cd personal-brand-os
+docker compose pull
+./scripts/restore.sh /secure-transfer/brand-os-20261009T011245Z-19807.tar.gz data/import
+mv data/import/hermes data/hermes
+mv data/import/knowledge knowledge
+mv data/import/media media
+./scripts/bootstrap.sh
+./scripts/credentials.sh nvidia
+docker compose restart hermes
+./scripts/wait-healthy.sh
+./scripts/verify.sh
+```
+
+Use these move commands only in a fresh checkout with empty destinations, as described above. The bundle is sufficient to clone without a Git hosting account. Generate a new bundle after future commits with `git bundle create backups/personal-brand-os.bundle --all` and protect runtime backups separately.

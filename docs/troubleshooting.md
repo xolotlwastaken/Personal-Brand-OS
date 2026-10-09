@@ -23,3 +23,13 @@
 | Python helper missing dependencies | Execute helpers using /opt/hermes/.venv/bin/python inside the pinned image. Hermes uses its bundled hermes_yaml module, not an assumed host PyYAML install. Do not install Python packages on the production host. |
 
 If a test cannot run, retain its exit code and actual failure evidence in data/hermes/verification, report it as failed or unverified, and fix the underlying problem before declaring it passed. No claims of real scraping, publishing or rendering should be inferred from a prompt playbook passing discovery tests.
+
+## Reconciliation and container restarts
+
+Bootstrap reconciles templates while leaving an already running container intact. Apply Compose changes only after active workers finish, using `docker compose up -d --force-recreate`; wait with `scripts/wait-healthy.sh`. Health probes use `/command/s6-setuidgid` explicitly because Docker exec PATH differs from upstream supervision PATH. KILL is needed by the root s6 supervisor to terminate unprivileged services cleanly.
+
+After an unexpected container replacement, an old claim can retain the previous container hostname until its lease expires. Confirm the previous container and worker are gone, inspect `kanban show/runs/log`, comment the recovery reason, then use native `kanban block --kind transient --reason ...` and `kanban unblock --reason ...`. Keep historical runs; do not edit SQL or signal a possibly reused PID. This recovery was exercised during setup.
+
+A ready backlog with one active worker is expected under the configured concurrency limit. Upstream can emit a dispatcher-stuck warning during long tasks even though the active worker is progressing; inspect actual running-card logs before intervening. Auxiliary Nous-auth warnings do not supply credentials and are not evidence of a failed configured NVIDIA primary call. The tested primary provider works; optional Nous-specific auxiliary features remain unconfigured.
+
+On Docker Desktop for Linux, the Desktop service must also be running after a workstation reboot. `docker desktop start` or the installed user service `systemctl --user start docker-desktop.service` starts it; wait for `docker info` before running project scripts. Use the existing desktop-linux context. The project does not install or enable a different Docker daemon, or enable Desktop at login without the operator choosing that host policy.

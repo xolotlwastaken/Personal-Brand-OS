@@ -24,8 +24,17 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "brand-ceo",
+            "task_id": "t_d12003ad",
+            "artifact": "/knowledge/operations/t_d12003ad-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -47,8 +56,17 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "brand-ceo",
+            "task_id": "t_d12003ad",
+            "artifact": "/knowledge/operations/t_d12003ad-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -71,8 +89,22 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "brand-ceo",
+            "task_id": "t_d12003ad",
+            "artifact": "/knowledge/operations/t_d12003ad-skill-examples.md"
+          },
+          {
+            "profile": "brand-manager",
+            "task_id": "t_3b163d2d",
+            "artifact": "/knowledge/brand/t_3b163d2d-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -94,8 +126,17 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "brand-manager",
+            "task_id": "t_3b163d2d",
+            "artifact": "/knowledge/brand/t_3b163d2d-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -115,8 +156,17 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "brand-manager",
+            "task_id": "t_3b163d2d",
+            "artifact": "/knowledge/brand/t_3b163d2d-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -136,8 +186,17 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "brand-manager",
+            "task_id": "t_3b163d2d",
+            "artifact": "/knowledge/brand/t_3b163d2d-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -157,8 +216,17 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "brand-manager",
+            "task_id": "t_3b163d2d",
+            "artifact": "/knowledge/brand/t_3b163d2d-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -178,8 +246,17 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "brand-manager",
+            "task_id": "t_3b163d2d",
+            "artifact": "/knowledge/brand/t_3b163d2d-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -201,8 +278,17 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "reference-builder",
+            "task_id": "t_f31cd66d",
+            "artifact": "/knowledge/research/t_f31cd66d-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -224,8 +310,17 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "reference-builder",
+            "task_id": "t_f31cd66d",
+            "artifact": "/knowledge/research/t_f31cd66d-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -248,8 +343,17 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "reference-builder",
+            "task_id": "t_f31cd66d",
+            "artifact": "/knowledge/research/t_f31cd66d-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -271,8 +375,17 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "reference-builder",
+            "task_id": "t_f31cd66d",
+            "artifact": "/knowledge/research/t_f31cd66d-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -294,8 +407,17 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "hook-writer",
+            "task_id": "t_2b7a98ab",
+            "artifact": "/knowledge/content/hooks/t_2b7a98ab-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -319,9 +441,21 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
-      }
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "hook-writer",
+            "task_id": "t_2b7a98ab",
+            "artifact": "/knowledge/content/hooks/t_2b7a98ab-skill-examples.md"
+          }
+        ],
+        "helper": "passed: reviewed upstream selftest and supplied synthetic three-row CSV"
+      },
+      "helper_original_sha256": "1c4daf61bde206677eb18e6c9279018b9fef31f9d1e72178268906553c07e448",
+      "helper_adapted_sha256": "1c4daf61bde206677eb18e6c9279018b9fef31f9d1e72178268906553c07e448"
     },
     {
       "name": "viral-hook-writer",
@@ -342,8 +476,17 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "hook-writer",
+            "task_id": "t_2b7a98ab",
+            "artifact": "/knowledge/content/hooks/t_2b7a98ab-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -363,8 +506,17 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "hook-writer",
+            "task_id": "t_2b7a98ab",
+            "artifact": "/knowledge/content/hooks/t_2b7a98ab-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -386,8 +538,17 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "script-writer",
+            "task_id": "t_e698a2d5",
+            "artifact": "/knowledge/content/scripts/t_e698a2d5-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -408,8 +569,22 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "script-writer",
+            "task_id": "t_e698a2d5",
+            "artifact": "/knowledge/content/scripts/t_e698a2d5-skill-examples.md"
+          },
+          {
+            "profile": "video-editor",
+            "task_id": "t_763f6864",
+            "artifact": "/knowledge/content/production-plans/t_763f6864-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -429,8 +604,17 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "script-writer",
+            "task_id": "t_e698a2d5",
+            "artifact": "/knowledge/content/scripts/t_e698a2d5-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -451,8 +635,22 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "script-writer",
+            "task_id": "t_e698a2d5",
+            "artifact": "/knowledge/content/scripts/t_e698a2d5-skill-examples.md"
+          },
+          {
+            "profile": "video-editor",
+            "task_id": "t_763f6864",
+            "artifact": "/knowledge/content/production-plans/t_763f6864-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -476,8 +674,17 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "video-editor",
+            "task_id": "t_763f6864",
+            "artifact": "/knowledge/content/production-plans/t_763f6864-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -497,8 +704,17 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "video-editor",
+            "task_id": "t_763f6864",
+            "artifact": "/knowledge/content/production-plans/t_763f6864-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -520,8 +736,17 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "publisher",
+            "task_id": "t_1248f904",
+            "artifact": "/knowledge/content/publication-packages/t_1248f904-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -541,8 +766,17 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "publisher",
+            "task_id": "t_1248f904",
+            "artifact": "/knowledge/content/publication-packages/t_1248f904-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -562,8 +796,17 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "publisher",
+            "task_id": "t_1248f904",
+            "artifact": "/knowledge/content/publication-packages/t_1248f904-skill-examples.md"
+          }
+        ]
       }
     },
     {
@@ -583,8 +826,17 @@
       "validation": {
         "directory": "passed",
         "SKILL.md": "passed",
-        "discovery": "pending runtime verification",
-        "intended_use": "pending; deterministic and live results recorded in data/verification"
+        "discovery": "passed: native skills_list and skill_view for every assigned profile",
+        "intended_use": "passed: bounded native worker produced a synthetic procedural example; content still needs human review",
+        "verified_on": "2026-10-09",
+        "evidence": "docs/verification-report.md; runtime data/hermes/verification/deterministic.json and live.json",
+        "examples": [
+          {
+            "profile": "publisher",
+            "task_id": "t_1248f904",
+            "artifact": "/knowledge/content/publication-packages/t_1248f904-skill-examples.md"
+          }
+        ]
       }
     }
   ]

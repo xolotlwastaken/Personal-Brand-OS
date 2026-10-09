@@ -19,6 +19,8 @@ docker compose restart hermes
 
 Bootstrap creates `.env` from `.env.example` using your UID/GID. The current image is official Hermes **0.21.6**, index digest `sha256:9774f4f39a9bb8c2f68ce728ed5e99ddbad282163be56764afacf88ed952b784`, source revision `818c13be1dc4fd28987e1e881a9408224afd4535`. It preserves upstream entrypoint and s6 supervision. No ports are published and no Docker socket is mounted. Upstream starts an authenticated internal loopback API for its control plane; it is reachable only within this container. Dashboard and social adapters are unconfigured.
 
+The repository is committed locally, and a portable Git bundle is available under backups/personal-brand-os.bundle. The verified state archive and transfer commands are recorded in docs/verification-report.md and docs/deployment.md.
+
 This local installation has securely reused only an existing static NVIDIA model API key. A fresh server must provision its own model credential. Nothing connects to the separate host Hermes installation. Model calls use the configured provider's account; costs and quotas depend on that account. The initial choice follows the available provider, with one worker at a time and bounded turns; model pricing has not been verified.
 
 ## Use the team
