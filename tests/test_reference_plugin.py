@@ -43,10 +43,11 @@ class PluginTest(unittest.TestCase):
     def test_worker_strips_credentials_and_proxies(self):
         proc = types.SimpleNamespace(communicate=lambda **kw: ('{"results":[]}', ''), returncode=0)
         with patch.object(p.Path, 'is_file', return_value=True), patch.object(p.subprocess, 'Popen', return_value=proc) as start, \
-             patch.dict(os.environ, {'NVIDIA_API_KEY': 'sentinel', 'HTTPS_PROXY': 'sentinel'}):
+             patch.dict(os.environ, {'NVIDIA_API_KEY': 'sentinel', 'NEURALWATT_API_KEY': 'sentinel', 'HTTPS_PROXY': 'sentinel'}):
             self.assertEqual(p.worker({'action': 'search', 'query': 'x'})['results'], [])
             env = start.call_args.kwargs['env']
             self.assertNotIn('NVIDIA_API_KEY', env)
+            self.assertNotIn('NEURALWATT_API_KEY', env)
             self.assertNotIn('HTTPS_PROXY', env)
             self.assertTrue(start.call_args.kwargs['start_new_session'])
 
@@ -77,15 +78,19 @@ class PluginTest(unittest.TestCase):
             sheet = Path(tmp) / 'sheet.jpg'
             sheet.write_bytes(b'jpeg')
             response = io.BytesIO(json.dumps({'choices': [{'message': {'content': 'observed'}}], 'usage': {'total_tokens': 10}}).encode())
-            with patch.dict(os.environ, {'NVIDIA_API_KEY': 'synthetic-sentinel'}), patch.object(p, 'urlopen', return_value=response) as request:
+            with patch.dict(os.environ, {'NEURALWATT_API_KEY': 'synthetic-sentinel'}), patch.object(p, 'urlopen', return_value=response) as request:
                 result = p.vision_request(sheet, [{'seconds': 0}])
                 self.assertEqual(result['observations'], 'observed')
-                self.assertEqual(request.call_args.args[0].full_url, 'https://integrate.api.nvidia.com/v1/chat/completions')
-            with patch.dict(os.environ, {'NVIDIA_API_KEY': 'synthetic-sentinel'}), patch.object(p, 'urlopen', side_effect=RuntimeError('secret-sentinel')):
+                self.assertEqual(request.call_args.args[0].full_url, 'https://api.neuralwatt.com/v1/chat/completions')
+                payload = json.loads(request.call_args.args[0].data)
+                self.assertEqual(payload['model'], 'deepseek-v4.1-flash')
+                self.assertEqual(payload['reasoning_effort'], 'none')
+                self.assertNotIn('reasoning_budget', payload)
+            with patch.dict(os.environ, {'NEURALWATT_API_KEY': 'synthetic-sentinel'}), patch.object(p, 'urlopen', side_effect=RuntimeError('secret-sentinel')):
                 with self.assertRaises(RuntimeError) as error:
                     p.vision_request(sheet, [{'seconds': 0}])
                 self.assertNotIn('secret-sentinel', str(error.exception))
-            with patch.dict(os.environ, {}, clear=True), self.assertRaises(ValueError):
+            with patch.dict(os.environ, {'NVIDIA_API_KEY': 'old-provider-only'}, clear=True), self.assertRaises(ValueError):
                 p.vision_request(sheet, [{'seconds': 0}])
 
 

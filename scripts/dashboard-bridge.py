@@ -142,6 +142,18 @@ def question(detail):
     return '', None, ''
 
 
+def recovery_context(body):
+    first = (body or '').splitlines()[:1]
+    if first and first[0].startswith('Brand OS recovery: '):
+        try:
+            value = json.loads(first[0][len('Brand OS recovery: '):])
+            if isinstance(value, dict):
+                return value
+        except ValueError:
+            pass
+    return {}
+
+
 def dispatch(request):
     op = request.get('op')
     if op == 'conversation':
@@ -157,7 +169,10 @@ def dispatch(request):
         for card in board['tasks']:
             detail = native('kanban_show', {'task_id': card['id']})
             reason, kind, key = question(detail)
+            recovery = recovery_context(detail['task']['body'])
             tasks.append({'task': detail['task'], 'parents': detail['parents'],
+                          'recovery_origin_task_id': recovery.get('origin_task_id'),
+                          'recovery_source_task_id': recovery.get('source_task_id'),
                           'children': detail['children'], 'runs': detail.get('runs', [])[-10:],
                           'creator_task_id': next((e['payload'].get('creator_task_id')
                               for e in detail.get('events', []) if e['kind'] == 'created'

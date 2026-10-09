@@ -1,7 +1,7 @@
 """Native reference tools. Only Reference Builder enables this toolset.
 
 Search/download/transcription run without model credentials in an isolated child.
-Visual observations use the existing NVIDIA model credential and a fixed endpoint.
+Visual observations use the profile’s Neuralwatt model credential and a fixed endpoint.
 """
 import base64
 import datetime
@@ -16,7 +16,7 @@ from urllib.error import HTTPError
 
 RUNTIME = Path('/opt/data/reference-runtime/bin/python')
 WORKING = Path('/media/working/references')
-VISION_MODEL = 'nvidia/nemotron-3-nano-omni-30b-a3b-reasoning'
+VISION_MODEL = 'deepseek-v4.1-flash'
 
 
 def stop_worker(proc):
@@ -83,9 +83,9 @@ def local_file(path, root, max_bytes):
 
 
 def vision_request(sheet, frames):
-    key = os.environ.get('NVIDIA_API_KEY')
+    key = os.environ.get('NEURALWATT_API_KEY')
     if not key:
-        raise ValueError('Visual reference analysis needs this profile’s NVIDIA model credential; no key was added or borrowed')
+        raise ValueError('Visual reference analysis needs this profile’s Neuralwatt model credential; no key was added or borrowed')
     ordering = ', '.join(f'cell {i+1}: {f["seconds"]:.2f}s' for i, f in enumerate(frames))
     prompt = ('This is a contact sheet, with one full video frame per grid cell in row-major order, four columns. '
               'Each cell has a printed label "cell NN @ timestamp". Use those labels; do not group multiple cells as one scene. '
@@ -95,11 +95,13 @@ def vision_request(sheet, frames):
               'Do not infer unseen motion, exact cuts, retention, performance, or why a video went viral. '
               'Mark unreadable text and uncertain interpretations explicitly. Blank trailing cells are padding. '
               f'Timestamps: {ordering}')
+    # Reserve the bounded completion allowance for visible frame observations.
+    # On Neuralwatt, reasoning tokens consume max_tokens too.
     payload = {'model': VISION_MODEL, 'messages': [{'role': 'user', 'content': [
         {'type': 'text', 'text': prompt},
         {'type': 'image_url', 'image_url': {'url': 'data:image/jpeg;base64,' + base64.b64encode(sheet.read_bytes()).decode()}}]}],
-               'max_tokens': 2000, 'reasoning_budget': 256, 'temperature': .2, 'stream': False}
-    request = Request('https://integrate.api.nvidia.com/v1/chat/completions',
+               'max_tokens': 2000, 'reasoning_effort': 'none', 'temperature': .2, 'stream': False}
+    request = Request('https://api.neuralwatt.com/v1/chat/completions',
                       data=json.dumps(payload).encode(),
                       headers={'Authorization': 'Bearer ' + key, 'Content-Type': 'application/json'}, method='POST')
     try:
@@ -167,7 +169,7 @@ def register(ctx):
          'Prepare a local project /media video: CPU speech transcription and up to 12 timestamped frames/contact sheet. Source attribution and evidence paths are persisted. Transcription and sampled frames have explicit limitations. Call brand_reference_visual to interpret frames. After fixing an unavailable transcriber, refresh=true creates a new attempt while preserving old evidence.',
          {'media_path': {'type': 'string'}, 'source_url': {'type': 'string'}, 'refresh': {'type': 'boolean', 'default': False}}, ['media_path']),
         ('brand_reference_visual', visual,
-         'Observe only the generated reference contact sheet using the existing NVIDIA model credential. Sends sampled images to the model provider, saves observations and usage. Cached repeats avoid another model call. Cannot verify every cut or performance.',
+         'Observe only the generated reference contact sheet using the profile’s Neuralwatt model credential. Sends sampled images to the model provider, saves observations and usage. Cached repeats avoid another model call. Cannot verify every cut or performance.',
          {'evidence_path': {'type': 'string'}}, ['evidence_path']),
     ]
     for name, handler, description, properties, required in definitions:

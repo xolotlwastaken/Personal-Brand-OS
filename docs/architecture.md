@@ -25,6 +25,25 @@ CEO uses native Kanban tools. Profiles share the native board; workers are assig
 
 Shared knowledge stores evidence, drafts, canonical brand notes and artifact handoffs. Kanban stores queue/status, dependencies, runs and workflow notes. No extra task database is introduced. Deterministic verification uses an isolated native test DB under data/hermes/verification, never a production queue.
 
+The `ceo-recovery` plugin runs in the infrastructure home through Hermes's
+`on_kanban_dispatch_tick` hook, after the native dispatch lock is released. It
+observes stopped project workers and creates a native CEO recovery card with no
+producing dependencies. The ordinary follow-up keeps its success dependency;
+the recovery can explain a failure immediately. Incident keys deduplicate across
+ticks and gateway restarts. An immediate `CEO to you:` comment makes the problem
+visible even before inference. If recovery itself fails, the same card becomes a
+human input gate. The dashboard joins these cards using observation provenance,
+without adding execution dependencies.
+
+Only the CEO recovery worker can use `brand_task_retry`. It validates the source,
+tenant, workspace and inactive claim, reserves one retry in a native audit comment,
+then uses the supported `hermes kanban unblock` CLI on the original task. It refuses
+human input/approval gates, capability/authentication failures and repeated retries.
+No replacement specialist graph is created. Native exhausted-worker states are
+parked with explicit transient blocks, so native board reads cannot re-promote them
+using a different default failure limit. Scans are bounded to 200 cards per status;
+truncation is logged. This hook requires a running gateway and readable native board.
+
 Security is container-level isolation from the host plus tool-level restrictions and collaboration conventions. All profiles use one OS user, so logical memory separation is **not** a filesystem confidentiality boundary between profiles. File tools do not become per-role ACLs. Hermes protects recognized credential/system paths, but a compromised profile could affect readable shared state. Use separate OS identities/containers only if a future threat model requires that boundary; it is not claimed here.
 
 There is no Docker socket, privileged flag, host networking or published port. Capabilities are dropped except CHOWN/SETUID/SETGID/DAC_OVERRIDE/FOWNER for upstream bootstrap and KILL for root supervision of unprivileged children. `no-new-privileges` is enabled. The image filesystem cannot be made globally read-only without redesigning upstream init; /project inputs are read-only and native write roots are limited to /opt/data:/knowledge:/media. CPU, RAM, process and log limits bound home-server usage.

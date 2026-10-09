@@ -63,13 +63,12 @@ else:
     body = f'''User-authorized bounded REAL reference acquisition acceptance test. Use only native tools; no terminal, login/cookies, comments collection, publishing or messages. At most one retrieval and one visual model call; no downstream cards. Read skill reel-analyzer and /knowledge/operations/reference-acquisition.md.
 Run brand_reference_search for public topic "AI automation workflow", platform instagram, limit 3. Treat snippets as unverified leads. Then test the supplied accessible source {SOURCE} through brand_reference_fetch and brand_reference_prepare(source_url=that URL). If the transcript is unavailable from an old cached attempt, use prepare refresh=true once. Call brand_reference_visual on returned evidence_path. Read the source, transcript and visual artifact files. Never claim full-video viewing, exact motion/cuts, personal user history or virality. Transcript is Hindi/Urdu/English and may be inaccurate; explicitly flag uncertain wording.
 Write /knowledge/research/references/<ACTUAL_TASK_ID>-live-reference-teardown.md with real task ID, owner, sources, retrieval date, approval=analysis-only, hook/observed beats supported by timestamps, original technique ideas and uncertainties. Include returned source/media/evidence/visual paths and actual metrics only when available; null view count remains unavailable. Read back; complete only if retrieval, machine transcript and visual observations exist. If access, quota or essential evidence prevents completion, block capability with the exact reason. Native Kanban is the only execution engine.
-This test uses a per-card nvidia/nemotron-3-super-120b-a12b override to avoid the existing Ultra model's quota wall; no profile/provider configuration is changed.'''
+This test uses Reference Builder’s configured deployment model/provider; no per-card provider override is applied.'''
     result = call('kanban_create', {'title': 'Verify real public reference search, download and evidence analysis',
                                   'assignee': 'reference-builder', 'body': body, 'workspace_kind': 'dir',
                                   'workspace_path': '/knowledge', 'tenant': 'brand-os-references-e2e',
                                   'max_runtime_seconds': 300, 'priority': 40,
-                                  'model': 'nvidia/nemotron-3-super-120b-a12b', 'provider': 'nvidia',
-                                  'idempotency_key': 'brand-os-reference-acquisition-v1', 'completion_contract': 'local-only'})
+                                  'idempotency_key': 'brand-os-reference-acquisition-neuralwatt-v1', 'completion_contract': 'local-only'})
     (OUT / 'reference-dispatch-submission.json').write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps({'task_id': result.get('task_id') or result.get('task', {}).get('id') or result.get('id'),
                       'native_submission': result}))

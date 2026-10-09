@@ -27,6 +27,8 @@ let ceoCurrentTarget = '';
 let ceoPending = null;
 let ceoCanSend = false;
 const ceoDrafts = new Map();
+let ceoReadState=new CEOReadState();
+try {ceoReadState=new CEOReadState(localStorage);} catch { /* Browser storage may be disabled. */ }
 let refreshing = false;
 let filters = {assignee:'', tenant:'', query:''};
 let requestKey = '';
@@ -91,7 +93,7 @@ async function refresh() {
     $('#sync-state').textContent = `Updated ${date(snapshot.updated_at)} SGT`;
     $('#nav-count').textContent = snapshot.board.tasks.filter(t => !['done','archived'].includes(t.status)).length;
     render();
-    if (currentView === 'ceo') await refreshCEO();
+    await refreshCEO();
   } catch (error) {
     $('#connection-error').textContent = error.message;
     $('#connection-error').hidden = false;
@@ -172,7 +174,7 @@ function ceoView() {
   }
   const state = ceoThread.brand_state;
   const status = ceoSending ? 'Sending your message…' : pendingHere ? 'Your CEO will respond here' : chat?.status || 'Start a conversation';
-  return `<div class="ceo-chat-page"><aside class="ceo-history"><details id="ceo-history" ${matchMedia('(min-width:701px)').matches?'open':''}><summary>Conversations <span>⌄</span></summary><button class="ceo-new" data-ceo-new="true" ${ceoSending?'disabled':''}><span>＋</span> New chat</button><h2>Conversations</h2><div class="ceo-history-list">${chats.map(c=>`<button class="ceo-history-item ${c.id===ceoConversationId?'selected':''}" data-ceo-conversation="${esc(c.id)}" title="${esc(c.title)}" ${ceoSending?'disabled':''}><span>${esc(c.title)}</span><small>${c.status==='Waiting for your answer'?'● Waiting for you':date(c.updated_at)}</small></button>`).join('') || '<p class="hint">Your conversations will appear here.</p>'}</div>${ceoThread.truncated?'<p class="hint">Recent history is shown. Older work is on the task board.</p>':''}</details><div class="ceo-history-foot"><span>YOUR BRAND</span><p>${esc(state.label)}</p>${state.path?`<button class="text-button" data-artifact="${esc(state.path)}">View strategy ↗</button>`:''}</div></aside>
+  return `<div class="ceo-chat-page"><aside class="ceo-history"><details id="ceo-history" ${matchMedia('(min-width:701px)').matches?'open':''}><summary>Conversations <span>⌄</span></summary><button class="ceo-new" data-ceo-new="true" ${ceoSending?'disabled':''}><span>＋</span> New chat</button><h2>Conversations</h2><div class="ceo-history-list">${chats.map(c=>`<button class="ceo-history-item ${c.id===ceoConversationId?'selected':''}" data-ceo-conversation="${esc(c.id)}" title="${esc(c.title)}" ${ceoSending?'disabled':''}><span>${esc(c.title)}<i class="ceo-unread-dot" aria-hidden="true" hidden></i></span><small>${c.status==='Waiting for your answer'?'● Waiting for you':date(c.updated_at)}</small></button>`).join('') || '<p class="hint">Your conversations will appear here.</p>'}</div>${ceoThread.truncated?'<p class="hint">Recent history is shown. Older work is on the task board.</p>':''}</details><div class="ceo-history-foot"><span>YOUR BRAND</span><p>${esc(state.label)}</p>${state.path?`<button class="text-button" data-artifact="${esc(state.path)}">View strategy ↗</button>`:''}</div></aside>
     <section class="ceo-chat-main" aria-label="CEO chat"><header class="ceo-chat-header"><div>${avatar('brand-ceo')}<div><h1>Brand CEO</h1><p>Your personal brand partner</p></div></div><div class="ceo-chat-tools"><button class="text-button" data-agent="brand-ceo">Live chat ↗</button><button class="icon-button" id="ceo-refresh" aria-label="Refresh conversation">↻</button></div></header>
     <details class="ceo-activity" id="ceo-activity"><summary><span class="ceo-status ${chat?.busy?'working':''}"></span><span id="ceo-chat-status" role="status">${esc(status)}</span><span>Team activity ⌄</span></summary><div>${chat?.cards.map(t=>`<button data-task="${esc(t.id)}"><span>${esc(names[t.assignee] || t.assignee)}</span><span>${esc(t.title)}</span>${badge(taskState(t))}</button>`).join('') || '<p>Your CEO coordinates the team and brings their questions and results here.</p>'}</div><button class="text-button" data-advanced-brief="true">Advanced task brief ↗</button></details>
     <div id="ceo-messages" class="ceo-messages" data-conversation="${esc(ceoConversationId)}" aria-label="Conversation messages" tabindex="0">${messages.map(m=>`<article class="ceo-chat-message ${m.role}" ${m.pending?'data-pending="true"':''}><div class="ceo-message-label">${m.role==='user'?'You':avatar('brand-ceo')+'Brand CEO'}<time>${date(m.time)}</time>${m.pending?'<span>Sending…</span>':''}</div><div class="ceo-message-content">${m.role==='user'?`<p>${esc(m.body)}</p>`:ceoMarkdown(m.body)}</div></article>`).join('') || '<div class="ceo-chat-welcome"><span>✦</span><h2>What would you like to work on?</h2><p>Build your brand, shape an idea, or plan your next piece of content.</p><button class="secondary" data-ceo-start="discover">Develop my personal brand</button></div>'}</div>
@@ -188,7 +190,34 @@ async function refreshCEO() {
         d.comments.some(c=>c.body.startsWith('Operator answer via CEO desk') && c.body.includes(ceoPending.key))))) ceoPending=null;
   }
   catch(error) { ceoError = error.message; }
-  finally { ceoRefreshing=false; if(currentView==='ceo') render(); }
+  finally { ceoRefreshing=false; if(currentView==='ceo') render(); else updateCEOUnread(); }
+}
+function updateCEOUnread() {
+  if (!ceoThread || !snapshot) return;
+  const chats=ceoConversations(ceoThread.tasks,snapshot.board.tasks);
+  const counts=new Map(chats.map(chat=>[chat.id,ceoReadState.unreadCount(chat)]));
+  const total=[...counts.values()].reduce((sum,count)=>sum+count,0);
+  $('#ceo-unread').hidden=!total;
+  const label=total?`Brand CEO, ${total} unread ${total===1?'reply':'replies'}`:'Brand CEO';
+  $('[data-view="ceo"]').setAttribute('aria-label',label);
+  $('[data-view="ceo"]').title=label;
+  const status=$('#ceo-unread-status');
+  const announcement=total?`${total} unread ${total===1?'reply':'replies'} from Brand CEO`:'';
+  if (status.textContent!==announcement) status.textContent=announcement;
+  document.querySelectorAll('[data-ceo-conversation]').forEach(button=>{
+    const count=counts.get(button.dataset.ceoConversation) || 0;
+    button.classList.toggle('unread',Boolean(count));
+    button.querySelector('.ceo-unread-dot').hidden=!count;
+    button.setAttribute('aria-label',`${button.title}${count?`, ${count} unread ${count===1?'reply':'replies'}`:''}`);
+  });
+}
+function readVisibleCEO() {
+  if (currentView!=='ceo' || document.hidden || !document.hasFocus() || document.querySelector('dialog[open]') || !ceoThread || !snapshot) return;
+  const messages=$('#ceo-messages');
+  if (!messages || messages.scrollHeight-messages.scrollTop-messages.clientHeight>=90) return;
+  const chat=ceoConversations(ceoThread.tasks,snapshot.board.tasks).find(c=>c.id===messages.dataset.conversation);
+  if (chat) ceoReadState.markRead(chat);
+  updateCEOUnread();
 }
 function goCEO(message='') {
   if (ceoSending) return;
@@ -252,6 +281,8 @@ function render() {
   }
   if(ceoSending) document.querySelectorAll('#ceo-form input, #ceo-form textarea, #ceo-form select, #ceo-form button').forEach(input=>input.disabled=true);
   $('#view-description').textContent = currentView==='ceo'?'Your CEO conversation · Persistent native task threads':filters.assignee || filters.tenant ? `Native board selection: ${names[filters.assignee] || 'all agents'} / ${filters.tenant || 'all projects'}` : 'Live from your native Hermes workspace';
+  readVisibleCEO();
+  updateCEOUnread();
 }
 function navigate() {
   currentView = Object.hasOwn(views,location.hash.slice(1)) ? location.hash.slice(1) : 'ceo';
@@ -401,8 +432,18 @@ document.addEventListener('keydown',(event)=>{
 });
 $('#new-task').addEventListener('click',()=>goCEO());
 window.addEventListener('hashchange',navigate);
-$('#detail-dialog').addEventListener('close',()=>{detailGeneration++;});
-$('#reader-dialog').addEventListener('close',()=>{readerGeneration++;});
+$('#detail-dialog').addEventListener('close',()=>{detailGeneration++; readVisibleCEO();});
+$('#reader-dialog').addEventListener('close',()=>{readerGeneration++; readVisibleCEO();});
+$('#chat-dialog').addEventListener('close',readVisibleCEO);
+document.addEventListener('scroll',event=>{if(event.target.id==='ceo-messages') readVisibleCEO();},true);
+window.addEventListener('focus',readVisibleCEO);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden && snapshot) refreshCEO();});
+window.addEventListener('storage',event=>{
+  if(event.key===ceoReadState.key || event.key===null) {
+    try {ceoReadState=new CEOReadState(localStorage);} catch {return;}
+    readVisibleCEO(); updateCEOUnread();
+  }
+});
 $('#clock').textContent=new Intl.DateTimeFormat('en-SG',{weekday:'short',day:'numeric',month:'short',timeZone:'Asia/Singapore'}).format(new Date());
 navigate();
 (async ()=>{
@@ -411,3 +452,4 @@ navigate();
 })();
 setInterval(()=>{if(!document.hidden && !document.querySelector('dialog[open]') && !document.activeElement?.matches('input,textarea,select')) refresh();},15000);
 setInterval(()=>{if(currentView==='ceo' && !document.hidden && snapshot && !ceoSending && !document.querySelector('dialog[open]')) refreshCEO();},3000);
+setInterval(()=>{if((currentView!=='ceo' || document.querySelector('dialog[open]')) && !document.hidden && snapshot && !ceoSending) refreshCEO();},15000);

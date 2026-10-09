@@ -60,6 +60,7 @@ for profile,(title,desc,owned,skills) in roles.items():
  path=root/'config/agents'/profile;path.mkdir(parents=True,exist_ok=True)
  tools=['file','skills','memory']+(['kanban'] if profile=='brand-ceo' else [])+(['brand-validation'] if profile in {'brand-ceo','script-writer','video-editor'} else [])
  config={'_config_version':50,'model':{'default':'${BRAND_MODEL}','provider':'${BRAND_PROVIDER}','base_url':'${BRAND_BASE_URL}'},'platform_toolsets':{s:tools for s in ['cli','api_server','telegram','discord','slack']},'agent':{'max_turns':24,'gateway_timeout':180,'reasoning_effort':'low'},'terminal':{'backend':'local','cwd':'/knowledge','home_mode':'profile'},'skills':{'creation_nudge_interval':0},'memory':{'memory_enabled':True,'user_profile_enabled':True},'kanban':{'auto_decompose':False,'orchestrator_profile':'brand-ceo','default_assignee':'brand-ceo','dispatch_in_gateway':True,'dispatch_interval_seconds':15,'max_in_progress':1,'max_in_progress_per_profile':1,'failure_limit':1,'review_dispatch':False,'dispatch_profiles':list(roles)},'tool_loop_guardrails':{'non_interactive_hard_stop_enabled':True}}
+ if profile=='brand-ceo':config['telemetry']={'shared_metrics':{'enabled':False,'send':False,'offer_version':2}}
  if profile in {'brand-ceo','script-writer','video-editor'}:config['plugins']={'enabled':['artifact-validator']}
  (path/'config.yaml').write_text(json.dumps(config,indent=2)+'\n')
  (path/'profile.yaml').write_text(json.dumps({'description':desc,'display_name':title,'description_auto':False},indent=2)+'\n')

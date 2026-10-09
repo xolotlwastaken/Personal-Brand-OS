@@ -93,7 +93,7 @@ def apply(root):
             skill['external_integrations'] = 'bounded reference-acquisition native plugin; no login/cookies'
             skill['runtime_dependencies'] = ['Hermes file/skills/kanban tools', 'reference-acquisition native plugin',
                                               'config/reference-requirements.lock', 'pinned local faster-whisper-tiny model',
-                                              'official-image FFmpeg', 'existing NVIDIA model credential for visual observations']
+                                              'official-image FFmpeg', 'profile Neuralwatt model credential for visual observations']
             if changed or 'reference_acquisition' not in skill['validation']:
                 skill['validation']['reference_acquisition'] = 'pending; see docs/references.md for separate live evidence'
     manifest_path.write_text(json.dumps(manifest, indent=2) + '\n')

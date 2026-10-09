@@ -8,6 +8,11 @@ conversation. Linked discovery rounds stay together in the original chat.
 The send arrow answers the current interview question or continues the latest
 completed exchange automatically. Enter sends; Shift + Enter adds a new line.
 Drafts are preserved when switching conversations or when the page refreshes.
+A red dot beside **Brand CEO** and each conversation marks unread CEO replies,
+including recovery updates. Replies are checked while you browse other dashboard
+pages. Opening a conversation clears its dot when the latest replies are visible;
+scrolling through older messages or opening a dialog keeps new replies unread.
+Read state persists in this browser across reloads, storing message IDs only.
 **Team activity** expands to show the underlying specialists and execution cards.
 The strategy badge reads canonical `brand/strategy.md` metadata only, never test
 artifacts. Existing starting notes are discovery context, not an approved strategy.

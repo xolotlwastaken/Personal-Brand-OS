@@ -1,4 +1,10 @@
 /* The CEO desk is a conversation surface. Execution details stay expandable. */
+.ceo-unread-dot {display:inline-block;width:8px;height:8px;border-radius:50%;background:#ef6464;flex-shrink:0;box-shadow:0 0 0 3px #ef646415;}
+.ceo-unread-dot[hidden] {display:none;}
+nav a .ceo-unread-dot {margin-left:auto;}
+.ceo-history-item>span {position:relative;padding-right:16px;}
+.ceo-history-item .ceo-unread-dot {position:absolute;right:0;top:50%;transform:translateY(-50%);width:6px;height:6px;}
+.ceo-history-item.unread>span,.ceo-history-item.unread small {color:var(--text);}
 .view-ceo {height:100dvh;overflow:hidden;display:flex;flex-direction:column;}
 .view-ceo>.sidebar {flex-shrink:0;}
 .view-ceo>.shell {flex:1;display:flex;flex-direction:column;min-height:0;}

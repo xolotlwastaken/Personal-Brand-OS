@@ -1,0 +1,8 @@
+name: ceo-recovery
+version: "1.0.0"
+description: "Native post-dispatch failure observation, CEO recovery cards and one bounded original-task retry."
+author: Personal Brand OS
+provides_hooks:
+  - on_kanban_dispatch_tick
+provides_tools:
+  - brand_task_retry

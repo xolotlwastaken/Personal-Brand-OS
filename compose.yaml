@@ -14,9 +14,9 @@ services:
       HERMES_DASHBOARD: "0"
       API_SERVER_ENABLED: "false"
       TZ: Asia/Singapore
-      BRAND_MODEL: ${BRAND_MODEL:-nvidia/nemotron-3-ultra-550b-a55b}
-      BRAND_PROVIDER: ${BRAND_PROVIDER:-nvidia}
-      BRAND_BASE_URL: ${BRAND_BASE_URL:-https://integrate.api.nvidia.com/v1}
+      BRAND_MODEL: ${BRAND_MODEL:-deepseek-v4.1-flash}
+      BRAND_PROVIDER: ${BRAND_PROVIDER:-custom}
+      BRAND_BASE_URL: ${BRAND_BASE_URL:-https://api.neuralwatt.com/v1}
     volumes:
       - ./data/hermes:/opt/data
       - ./knowledge:/knowledge

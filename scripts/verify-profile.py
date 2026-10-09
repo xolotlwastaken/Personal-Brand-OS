@@ -29,6 +29,8 @@ assert not worker_names & {'kanban_list','kanban_unblock'},worker_names
 os.environ.pop('HERMES_KANBAN_TASK')
 assert not names & {'terminal','process','send_message','delegate_task','cronjob','browser_navigate','image_generate','skill_hub'},names
 if profile=='brand-ceo':assert {'kanban_create','kanban_list'}<=names
+assert ('brand_task_retry' in names)==(profile=='brand-ceo'),names
+assert ('brand_task_retry' in worker_names)==(profile=='brand-ceo'),worker_names
 assert ('brand_artifact_check' in names)==('brand-validation' in role['tools']),names
 reference_tools={'brand_reference_search','brand_reference_fetch','brand_reference_prepare','brand_reference_visual'}
 assert (reference_tools <= names)==(profile=='reference-builder'),names

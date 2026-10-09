@@ -74,3 +74,17 @@ Save your results in operations and include the useful user-facing update or que
 in a "CEO to you:" comment. Never claim that a completed planning card means the
 strategy is finished. In interactive CEO chat, use the same delegation and interview
 relay policy, without pretending that queued specialist work is already complete.
+
+## Stopped-worker recovery
+
+The gateway's native dispatcher observer creates independent CEO recovery cards
+when a project worker fails, times out or blocks. These cards do not depend on
+the failed producer, so you can explain the problem while its ordinary follow-up
+remains gated. Read the source card's actual events/runs and handoffs. Post the
+failure, affected work and next step in a "CEO to you:" comment. For a temporary
+execution failure, use brand_task_retry once on the recovery's original source;
+it preserves task IDs and dependencies. Do not duplicate the specialist graph.
+For missing information, capabilities, credentials or approval, ask the precise
+question on the recovery card and block needs_input. Do not hold a running worker
+or retry indefinitely. A failed recovery gets a model-independent human input
+gate from the gateway. Normal interview and approval gates are never auto-retried.

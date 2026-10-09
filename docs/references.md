@@ -44,7 +44,7 @@ Tool sequence:
    12 or fewer labeled frames, contact sheet, evidence JSON and vault Markdown.
 4. `brand_reference_visual(evidence_path)` returns persisted sampled-frame
    observations and actual model usage. Only the generated contact sheet goes
-   to the existing NVIDIA model provider.
+   to the profile’s Neuralwatt model provider.
 
 The same URL/content reuses saved artifacts; cached visual repeats make no model
 call. After repairing unavailable speech dependencies, `prepare(refresh=true)`
@@ -104,8 +104,9 @@ resolve/review a new lock before using another platform.
 - Speech checkpoint: `Systran/faster-whisper-tiny`, exact revision
   `d90ca5fe260221311c53c58e660288d3deb8d356`; downloaded anonymously during setup.
 - FFmpeg/FFprobe and the timestamp-label font come from the pinned official image.
-- Vision: fixed `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning` endpoint, bounded
-  output/reasoning, using Reference Builder's existing `NVIDIA_API_KEY` only.
+- Vision: fixed Neuralwatt `deepseek-v4.1-flash` at
+  `https://api.neuralwatt.com/v1/chat/completions`, a 2,000-token output cap and reasoning
+  disabled, using Reference Builder’s `NEURALWATT_API_KEY` only.
 
 Reference code/configuration is versioned; downloaded media, generated evidence,
 model weights and Python runtime are Git-ignored. Backups retain reference
@@ -116,17 +117,34 @@ Existing private vault notes, credentials, memories and session DBs are preserve
 Upstream technical sources: [DDGS](https://github.com/deedy5/ddgs),
 [yt-dlp](https://github.com/yt-dlp/yt-dlp),
 [faster-whisper](https://github.com/SYSTRAN/faster-whisper),
-[NVIDIA vision endpoint](https://docs.api.nvidia.com/nim/re/reference/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning-infer).
-Actual endpoint calls were checked because published model documentation can
-outlive an endpoint: the initially selected older vision model returned HTTP 410.
+[Neuralwatt model and vision support](https://portal.neuralwatt.com/models/deepseek-v4.1-flash).
+The historical verification below used NVIDIA before the Neuralwatt migration;
+it does not establish live Neuralwatt vision success. Old evidence stays preserved.
 
-## Verification on 9 October 2026
+## Neuralwatt migration verification on 9 October 2026
+
+A fresh request against an existing local contact sheet returned complete
+`deepseek-v4.1-flash` observations, using 1,262 prompt tokens and 365 completion
+tokens (zero reasoning tokens). A repeat reused the saved artifact. Evidence is in
+`data/hermes/verification/neuralwatt-vision.json`; historical NVIDIA evidence
+remains intact. No new public search or download was needed for this check.
+
+The initial low-reasoning vision request exhausted the entire 2,000-token cap
+inside reasoning and returned no observations. The final adapter explicitly
+sets `reasoning_effort=none` for this bounded observation call; agent reasoning
+settings remain `low`. Neuralwatt documents that reasoning consumes the same
+completion allowance in its [Chat Completions reference](https://docs.neuralwatt.com/api/chat-completions).
+Synthetic reference tests passed 27 tests with 88% combined worker/plugin coverage.
+This checks the integration and cached-repeat behavior; sampled observations
+still require human review.
+
+## Historical NVIDIA verification on 9 October 2026
 
 ```bash
 ./scripts/verify.sh
 ./scripts/verify-references.sh     # synthetic tests + native tool discovery; no inference/network
 ./scripts/e2e.sh                  # existing bounded workflow, idempotent
-# Explicit live requests/model usage:
+# Current explicit live requests/model usage (uses configured Neuralwatt credentials):
 docker compose exec -T --user hermes hermes /opt/hermes/.venv/bin/python /project/scripts/verify-references-live.py tools
 docker compose exec -T --user hermes hermes /opt/hermes/.venv/bin/python /project/scripts/verify-references-live.py dispatcher
 ```

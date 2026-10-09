@@ -27,15 +27,21 @@ def managed(dst, content):
 base=json.loads((P/'config/agents/brand-ceo/config.yaml').read_text())
 def expand(cfg):
     s=json.dumps(cfg)
-    for k,default in [('BRAND_MODEL','nvidia/nemotron-3-ultra-550b-a55b'),('BRAND_PROVIDER','nvidia'),('BRAND_BASE_URL','https://integrate.api.nvidia.com/v1')]:
+    for k,default in [('BRAND_MODEL','deepseek-v4.1-flash'),('BRAND_PROVIDER','custom'),('BRAND_BASE_URL','https://api.neuralwatt.com/v1')]:
         s=s.replace('${'+k+'}',os.environ.get(k,default))
     return json.loads(s)
-base=expand(base);base['gateway']={'multiplex_profiles':True};base.pop('plugins',None);base['platform_toolsets']={'cli':['kanban'],'api_server':['kanban']}
+base=expand(base);base['gateway']={'multiplex_profiles':True};base['plugins']={'enabled':['ceo-recovery']};base['platform_toolsets']={'cli':['kanban'],'api_server':['kanban']}
 # Discard upstream first-boot defaults only in this new project state.
 root_config=H/'config.yaml'
 if root_config.exists() and 'config.yaml' not in previous and not (H/'profiles').exists():
     managed_backup=H/'config-backups/upstream-first-boot.yaml';managed_backup.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(root_config,managed_backup);root_config.unlink()
 managed(root_config,json.dumps(base,indent=2).encode()+b'\n')
+# Failure observation belongs to gateway infrastructure, not an eighth agent.
+def install_plugin(dest, name):
+    for f in (P/'config/plugins'/name).rglob('*'):
+        if f.is_file() and '__pycache__' not in f.parts and f.suffix != '.pyc':
+            managed(dest/'plugins'/name/f.relative_to(P/'config/plugins'/name),f.read_bytes())
+install_plugin(H, 'ceo-recovery')
 # Keep root offline for messaging; its gateway owns dispatcher/cron infrastructure only.
 for profile,role in roles.items():
     if profile not in list_profile_names():
@@ -55,6 +61,8 @@ for profile,role in roles.items():
     if 'brand-validation' in role['tools']:
         for f in (P/'config/plugins/artifact-validator').rglob('*'):
             if f.is_file():managed(dest/'plugins/artifact-validator'/f.relative_to(P/'config/plugins/artifact-validator'),f.read_bytes())
+    if profile == 'brand-ceo':
+        install_plugin(dest, 'ceo-recovery')
     if 'brand-references' in role['tools']:
         for f in (P/'config/plugins/reference-acquisition').rglob('*'):
             if f.is_file() and '__pycache__' not in f.parts and f.suffix != '.pyc':
@@ -68,7 +76,7 @@ for profile,role in roles.items():
     if imported.exists():
         existing=dotenv_values(dest/'.env')
         for key,value in dotenv_values(imported).items():
-            if key in {'NVIDIA_API_KEY','OPENROUTER_API_KEY','OPENAI_API_KEY','CUSTOM_API_KEY'} and value and not existing.get(key):
+            if key in {'NVIDIA_API_KEY','OPENROUTER_API_KEY','OPENAI_API_KEY','CUSTOM_API_KEY','NEURALWATT_API_KEY'} and value and not existing.get(key):
                 set_key(str(dest/'.env'),key,value)
         os.chmod(dest/'.env',0o600)
 # Seed vault from templates only if absent; never reconcile or overwrite runtime knowledge.

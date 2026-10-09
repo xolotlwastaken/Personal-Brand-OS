@@ -4,17 +4,51 @@
 
 Install Docker Engine and Compose plugin from Docker's official installation instructions for your distribution. Give the deploying user Docker access (membership in the Docker group is effectively host administration). Use a local ext4/xfs filesystem, not cloud-sync/NFS/SMB, for data/hermes. No Python/Hermes packages on the host are required.
 
-Clone this repository, run `./scripts/bootstrap.sh`, provision a static model key through `./scripts/credentials.sh nvidia`, then `docker compose restart hermes`, `./scripts/wait-healthy.sh` and `./scripts/verify.sh`. Bootstrap uses the invoking user's IDs in .env. If deploying for another owner, configure HERMES_UID/HERMES_GID and ensure knowledge/media are writable by that owner. Do not use Compose `user:` with the official image: init must run as root before dropping to hermes.
+Clone this repository, run `./scripts/bootstrap.sh`, provision a static model key through `./scripts/credentials.sh neuralwatt`, then `docker compose restart hermes`, `./scripts/wait-healthy.sh` and `./scripts/verify.sh`. Bootstrap uses the invoking user's IDs in .env. If deploying for another owner, configure HERMES_UID/HERMES_GID and ensure knowledge/media are writable by that owner. Do not use Compose `user:` with the official image: init must run as root before dropping to hermes.
 
 The published official index pin is in compose.yaml, Dockerfile and .env.example. Tested runtime: Hermes 0.21.6, source 818c13be1dc4fd28987e1e881a9408224afd4535, amd64. arm64 is published in that index but untested locally. Record a replacement index digest before upgrading; never silently use latest.
 
 ## Model settings and credentials
 
-`.env` contains deployment IDs, image pin and BRAND_MODEL/BRAND_PROVIDER/BRAND_BASE_URL, not keys. The available local provider is NVIDIA and the starting model is nvidia/nemotron-3-ultra-550b-a55b. This preserves a provider already verified on this machine; pricing is account-dependent and not verified. One worker, 24 tool turns and task runtime caps limit initial usage. Change the three model variables to your tested provider/model, then bootstrap to reconcile owned config fields.
+`.env` contains deployment IDs, image pin and BRAND_MODEL/BRAND_PROVIDER/BRAND_BASE_URL, not keys. The default is Neuralwatt: `BRAND_MODEL=deepseek-v4.1-flash`, `BRAND_PROVIDER=custom`, `BRAND_BASE_URL=https://api.neuralwatt.com/v1`. Hermes uses its OpenAI-compatible Chat Completions client and resolves the host-specific `NEURALWATT_API_KEY` from each profile’s credential file. See [Neuralwatt’s model documentation](https://portal.neuralwatt.com/models/deepseek-v4.1-flash). Costs and quotas depend on your account. One worker, 24 tool turns and task runtime caps limit initial usage. Change the three model variables to your tested provider/model, then bootstrap to reconcile owned config fields.
 
 Static keys live at data/hermes/profiles/<name>/.env (0600). `credentials.sh` prompts without echo and writes through stdin. Never type keys into prompts or CLI arguments, commit them, or render a full `docker compose config` into logs. To give one profile its own model, edit that profile's versioned config.yaml model block, replacing variable placeholders with the intended non-secret provider/model, then run bootstrap. Runtime edits outside templates are reported as drift.
 
 For future OAuth use `docker compose exec --user hermes hermes hermes -p <name> auth add <provider>` or the official setup wizard. Do not copy single-use refresh grants into sibling profiles. Use Hermes's native root credential-pool fallback where appropriate. When moving servers, reauthorize OAuth providers and external services rather than relying on copied refresh grants. None of those integrations is active here. API keys may be securely reprovisioned or transferred in a separately encrypted secret archive. The internal control-plane API key is regenerated if absent.
+
+## Switching an existing NVIDIA deployment to Neuralwatt
+
+Provision the key with `./scripts/credentials.sh neuralwatt`, then change the three
+`BRAND_*` values in `.env` to the Neuralwatt values above. The credential helper
+preserves existing keys and saves the Neuralwatt key in all seven profiles; no key
+belongs in the deployment `.env`. Reference Builder’s sampled-frame vision tool
+also uses `deepseek-v4.1-flash` and `NEURALWATT_API_KEY` at Neuralwatt’s fixed endpoint.
+Historical NVIDIA evidence and cached observations remain available.
+
+Wait for active workers to finish before changing the container. Reconcile using
+the new deployment environment through the official entrypoint:
+
+```bash
+docker compose stop hermes
+./scripts/bootstrap.sh
+./scripts/verify.sh
+```
+
+Stopping an idle container lets bootstrap use a one-off official container with
+the updated Compose environment, reconcile managed files and recreate the gateway.
+Running bootstrap against an existing container would use its old `BRAND_*`
+environment. Review any reported drift before the explicit `--apply-drift` action.
+Existing task-specific model overrides are retained; inspect them with native
+`kanban show` and use `kanban set-model` if a particular unfinished task needs updating.
+
+Migration verification on 9 October 2026: all seven native provider resolvers
+selected Neuralwatt’s Chat Completions endpoint and their own profile credential.
+The recreated official gateway became healthy; fresh native CEO text and read-file
+tool calls returned successfully. `scripts/verify.sh` passed, the host unit suite
+passed 54 tests, and reference tests passed 27 tests with 88% combined coverage.
+`scripts/e2e.sh` reused its existing completed card; it was not a fresh Neuralwatt
+dispatcher test. Provider-resolution evidence is saved under the ignored
+`data/hermes/verification/neuralwatt-provider.json`.
 
 ## Lifecycle
 
@@ -81,7 +115,7 @@ mv data/import/hermes data/hermes
 mv data/import/knowledge knowledge
 mv data/import/media media
 ./scripts/bootstrap.sh
-./scripts/credentials.sh nvidia
+./scripts/credentials.sh neuralwatt
 docker compose restart hermes
 ./scripts/wait-healthy.sh
 ./scripts/verify.sh

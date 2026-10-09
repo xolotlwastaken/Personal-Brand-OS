@@ -2,7 +2,7 @@
 import json, os, sys
 from pathlib import Path
 from dotenv import set_key
-allowed={'nvidia':'NVIDIA_API_KEY','openrouter':'OPENROUTER_API_KEY','openai':'OPENAI_API_KEY','custom':'CUSTOM_API_KEY'}
+allowed={'neuralwatt':'NEURALWATT_API_KEY','nvidia':'NVIDIA_API_KEY','openrouter':'OPENROUTER_API_KEY','openai':'OPENAI_API_KEY','custom':'CUSTOM_API_KEY'}
 provider=sys.argv[1]; assert provider in allowed,'unsupported provider'
 key=sys.stdin.read().strip();assert key and '\n' not in key,'empty/invalid key'
 roles=json.loads(Path('/project/config/agents.json').read_text())

@@ -22,7 +22,7 @@ assert all(p.read_bytes()==content for p,content in before.items())
 assert records()==history
 for p in (root/'profiles').glob('*/.env'):
     values=dotenv_values(p)
-    assert not any(values.get(k) for k in ['NVIDIA_API_KEY','OPENAI_API_KEY','OPENROUTER_API_KEY','CUSTOM_API_KEY'])
+    assert not any(values.get(k) for k in ['NVIDIA_API_KEY','OPENAI_API_KEY','OPENROUTER_API_KEY','CUSTOM_API_KEY','NEURALWATT_API_KEY'])
 os.environ['HERMES_HOME']=str(root/'profiles/brand-ceo');os.environ['HERMES_PROFILE']='brand-ceo'
 from tools.kanban_tools import registry
 listed=json.loads(registry.get_entry('kanban_list').handler({}));assert not listed.get('error') and listed['tasks'],listed

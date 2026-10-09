@@ -1,11 +1,56 @@
 'use strict';
 
+// Browser presentation state only; no task state or message text is stored here.
+class CEOReadState {
+  constructor(storage) {
+    this.storage=storage;
+    this.key='brand-os-ceo-read-v1';
+    this.seen=new Map();
+    try {
+      const saved=JSON.parse(storage?.getItem(this.key) || '{}');
+      if (saved && typeof saved==='object' && !Array.isArray(saved)) {
+        for (const [id,messages] of Object.entries(saved)) {
+          if (Array.isArray(messages)) this.seen.set(id,new Set(messages.filter(m=>typeof m==='string')));
+        }
+      }
+    } catch { /* Read tracking still works when browser storage is unavailable. */ }
+  }
+  replyIds(chat) {
+    return new Set(chat.messages.filter(m=>m.role==='assistant').map(m=>m.id));
+  }
+  unreadCount(chat) {
+    const seen=this.seen.get(chat.id);
+    return [...this.replyIds(chat)].filter(id=>!seen?.has(id)).length;
+  }
+  markRead(chat) {
+    const seen=this.seen.get(chat.id) || new Set();
+    const replies=this.replyIds(chat);
+    if (![...replies].some(id=>!seen.has(id))) return false;
+    this.seen.set(chat.id,new Set([...seen,...replies]));
+    try {this.storage?.setItem(this.key,JSON.stringify(Object.fromEntries([...this.seen].map(([id,messages])=>[id,[...messages]]))));}
+    catch { /* A full or disabled store must not stop the conversation. */ }
+    return true;
+  }
+}
+
 // Presentation only: native cards, creation provenance and dependencies remain
 // the authoritative conversation history and execution state.
 function ceoConversations(entries, board) {
+  // Warm dashboard adapters may predate recovery metadata. Native card bodies
+  // carry the same observation provenance, so open dashboards need no restart.
+  entries = entries.map(d=>{
+    const first=(d.task.body || '').split('\n')[0];
+    if (!first.startsWith('Brand OS recovery: ')) return d;
+    try {
+      const context=JSON.parse(first.slice('Brand OS recovery: '.length));
+      const valid=id=>typeof id==='string' && /^t_[a-zA-Z0-9]+$/.test(id);
+      return {...d,recovery_origin_task_id:d.recovery_origin_task_id || (valid(context?.origin_task_id)?context.origin_task_id:null),
+        recovery_source_task_id:d.recovery_source_task_id || (valid(context?.source_task_id)?context.source_task_id:null)};
+    } catch {return d;}
+  });
   const compare = (a,b)=>(a.created_at || 0)-(b.created_at || 0) || a.id.localeCompare(b.id);
   const nodes = new Map((board || []).map(t=>[t.id,{...t,parents:[...(t.parents || [])]}]));
-  for (const d of entries) nodes.set(d.task.id,{...d.task,parents:[...(d.parents || []),...(d.creator_task_id?[d.creator_task_id]:[])]});
+  for (const d of entries) nodes.set(d.task.id,{...d.task,parents:[...(d.parents || []),...(d.creator_task_id?[d.creator_task_id]:[]),...(d.recovery_origin_task_id?[d.recovery_origin_task_id]:[])]});
   for (const d of entries) for (const id of d.children || []) {
     if (!nodes.has(id)) nodes.set(id,{id,parents:[]});
     nodes.get(id).parents.push(d.task.id);
@@ -36,7 +81,7 @@ function ceoConversations(entries, board) {
   for (const chat of groups.values()) {
     // A specialist may be commissioned without depending on the planning CEO
     // card. Include producers of this chat's relays in its activity display.
-    const producers=chat.entries.flatMap(d=>d.parents || []);
+    const producers=chat.entries.flatMap(d=>[...(d.parents || []),...(d.recovery_source_task_id?[d.recovery_source_task_id]:[])]);
     const seen=new Set(chat.cards.map(t=>t.id));
     while (producers.length && seen.size<500) {
       const id=producers.pop();
@@ -119,4 +164,4 @@ function ceoMarkdown(text) {
   return blocks.join('');
 }
 
-if (typeof module !== 'undefined') module.exports={ceoConversations,ceoMarkdown};
+if (typeof module !== 'undefined') module.exports={ceoConversations,ceoMarkdown,CEOReadState};

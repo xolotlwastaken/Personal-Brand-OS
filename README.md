@@ -10,7 +10,7 @@ Prerequisites: Docker Engine (or Desktop), Docker Compose v2+, Bash, Git, GNU co
 git clone --branch main <your-repository-url-or-transferred-Git-bundle> personal-brand-os
 cd personal-brand-os
 ./scripts/bootstrap.sh
-./scripts/credentials.sh nvidia    # hidden prompt for your MODEL API key
+./scripts/credentials.sh neuralwatt # hidden prompt for your Neuralwatt API key
 # Or: ./scripts/credentials.sh openrouter (also change model/provider/base URL in .env)
 docker compose restart hermes
 ./scripts/wait-healthy.sh
@@ -22,7 +22,7 @@ Bootstrap creates `.env` from `.env.example` using your UID/GID. The current ima
 
 The repository is committed locally, and a portable Git bundle is available under backups/personal-brand-os.bundle. The verified state archive and transfer commands are recorded in docs/verification-report.md and docs/deployment.md.
 
-This local installation has securely reused only an existing static NVIDIA model API key. A fresh server must provision its own model credential. Nothing connects to the separate host Hermes installation. Model calls use the configured provider's account; costs and quotas depend on that account. The initial choice follows the available provider, with one worker at a time and bounded turns; model pricing has not been verified.
+All seven profiles default to Neuralwatt’s `deepseek-v4.1-flash` through Hermes’s `custom` OpenAI-compatible provider at `https://api.neuralwatt.com/v1`. Provision `NEURALWATT_API_KEY` with the hidden credential prompt above. Each server needs its own model credential. Nothing connects to the separate host Hermes installation. Costs and quotas depend on your Neuralwatt account; one worker at a time and bounded turns limit usage.
 
 ## Use the team
 
@@ -86,7 +86,7 @@ See [dashboard operations and verification](docs/dashboard.md).
 Reference Builder has four native reference tools. It searches public web indexes,
 downloads individual accessible Instagram Reels/posts or YouTube videos without
 login/cookies, transcribes audio locally and extracts timestamped frames. Visual
-observations use the existing NVIDIA model credential and send only the sampled
+observations use the profile’s Neuralwatt model credential and send only the sampled
 contact sheet to that provider. Defaults: up to three references per brief,
 180 seconds and 100 MiB per clip, up to 12 sampled frames. Platform restrictions
 can still prevent retrieval; failures remain explicit. See [reference operations,

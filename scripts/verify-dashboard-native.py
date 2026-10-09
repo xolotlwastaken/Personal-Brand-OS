@@ -1,5 +1,6 @@
 """DETERMINISTIC isolated native Kanban integration. Never dispatches or runs inference."""
 import importlib.util
+import json
 import os
 from pathlib import Path
 import tempfile
@@ -115,6 +116,13 @@ with tempfile.TemporaryDirectory(prefix='brand-dashboard-native-') as temporary:
         os.environ.pop('HERMES_KANBAN_TASK', None)
     joined = next(d for d in bridge.dispatch({'op': 'ceo_thread'})['tasks'] if d['task']['id']==relay)
     assert joined['creator_task_id'] == ceo and joined['parents'] == []
+    recovery = bridge.native('kanban_create', {'title': 'SYNTHETIC recovery presentation',
+        'body': 'Brand OS recovery: ' + json.dumps({'source_task_id': tid, 'origin_task_id': ceo}),
+        'assignee': 'brand-ceo', 'tenant': bridge.CEO_TENANT,
+        'workspace_kind': 'dir', 'workspace_path': '/knowledge'})['task_id']
+    observed = next(d for d in bridge.dispatch({'op': 'ceo_thread'})['tasks'] if d['task']['id'] == recovery)
+    assert observed['recovery_origin_task_id'] == ceo and observed['recovery_source_task_id'] == tid
+    assert observed['parents'] == [], 'Presentation provenance must not gate native recovery execution'
     print('PASS DETERMINISTIC isolated dashboard/native Kanban: create, deduplicate, dependencies, '
           'operator note, unblock, CEO routing, interview replies, retry safety, and input restrictions. '
           'No production mutations or inference.')

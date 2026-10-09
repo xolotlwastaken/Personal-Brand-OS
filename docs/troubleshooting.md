@@ -1,5 +1,33 @@
 # Troubleshooting
 
+## CEO waiting silently after a specialist stops
+
+The infrastructure `ceo-recovery` plugin observes native dispatcher outcomes every
+15 seconds. A recovery appears in the original CEO conversation independently of
+the failed producer. It reports the stopped task immediately, lets the CEO retry a
+temporary execution failure once, or asks for missing input/an operator fix. A
+failed CEO recovery gets a human input gate without requiring a model response.
+Normal interview and approval gates remain parked for the human.
+
+Run `./scripts/bootstrap.sh` to reconcile versioned configuration, then reload the
+native gateway plugins (or restart the container when its workers are idle).
+Bootstrap preserves and reports untracked runtime configuration drift; do not use
+`--apply-drift` unless the operator explicitly chooses to apply it. Verify with
+`./scripts/verify.sh` and `./scripts/verify-dashboard.sh`. Recovery regression tests
+use isolated databases, fake spawns and an injected timeout clock; they run no
+inference. They are distinct from `./scripts/e2e.sh` real dispatcher inference.
+The separate bounded real recovery test is
+`docker compose exec -T --user hermes hermes /opt/hermes/.venv/bin/python /project/scripts/verify-ceo-recovery-live.py`.
+It uses synthetic content, runs the actual CEO and Hook Writer, and records its
+result in `data/hermes/verification/ceo-recovery-live.json`. Re-running reuses the
+same submission; it is not part of deterministic verification.
+
+Human/capability blocks are never retried automatically. After supplying the missing
+information through the CEO recovery, follow its explicit operator instructions
+to unblock the original card. To inspect it, use `hermes -p brand-ceo kanban show
+<task-id>` inside the container. If the gateway is down, restore gateway health
+first; no dispatcher hook can run while its supervising gateway is stopped.
+
 | Failure | Check and recovery |
 |---|---|
 | Docker unavailable | `docker version`, `docker compose version`, `docker info`; install Engine/plugin or start Docker Desktop. Check deploying user's daemon access. |
@@ -30,6 +58,6 @@ Bootstrap reconciles templates while leaving an already running container intact
 
 After an unexpected container replacement, an old claim can retain the previous container hostname until its lease expires. Confirm the previous container and worker are gone, inspect `kanban show/runs/log`, comment the recovery reason, then use native `kanban block --kind transient --reason ...` and `kanban unblock --reason ...`. Keep historical runs; do not edit SQL or signal a possibly reused PID. This recovery was exercised during setup.
 
-A ready backlog with one active worker is expected under the configured concurrency limit. Upstream can emit a dispatcher-stuck warning during long tasks even though the active worker is progressing; inspect actual running-card logs before intervening. Auxiliary Nous-auth warnings do not supply credentials and are not evidence of a failed configured NVIDIA primary call. The tested primary provider works; optional Nous-specific auxiliary features remain unconfigured.
+A ready backlog with one active worker is expected under the configured concurrency limit. Upstream can emit a dispatcher-stuck warning during long tasks even though the active worker is progressing; inspect actual running-card logs before intervening. Auxiliary Nous-auth warnings do not supply credentials and are not evidence of a failed configured primary call. Verify the configured primary provider separately; optional Nous-specific auxiliary features remain unconfigured.
 
 On Docker Desktop for Linux, the Desktop service must also be running after a workstation reboot. `docker desktop start` or the installed user service `systemctl --user start docker-desktop.service` starts it; wait for `docker info` before running project scripts. Use the existing desktop-linux context. The project does not install or enable a different Docker daemon, or enable Desktop at login without the operator choosing that host policy.

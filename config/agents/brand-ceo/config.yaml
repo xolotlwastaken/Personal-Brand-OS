@@ -10,35 +10,40 @@
       "skills",
       "memory",
       "kanban",
-      "brand-validation"
+      "brand-validation",
+      "brand-recovery"
     ],
     "api_server": [
       "file",
       "skills",
       "memory",
       "kanban",
-      "brand-validation"
+      "brand-validation",
+      "brand-recovery"
     ],
     "telegram": [
       "file",
       "skills",
       "memory",
       "kanban",
-      "brand-validation"
+      "brand-validation",
+      "brand-recovery"
     ],
     "discord": [
       "file",
       "skills",
       "memory",
       "kanban",
-      "brand-validation"
+      "brand-validation",
+      "brand-recovery"
     ],
     "slack": [
       "file",
       "skills",
       "memory",
       "kanban",
-      "brand-validation"
+      "brand-validation",
+      "brand-recovery"
     ]
   },
   "agent": {
@@ -84,7 +89,15 @@
   "_config_version": 50,
   "plugins": {
     "enabled": [
-      "artifact-validator"
+      "artifact-validator",
+      "ceo-recovery"
     ]
+  },
+  "telemetry": {
+    "shared_metrics": {
+      "enabled": false,
+      "send": false,
+      "offer_version": 2
+    }
   }
 }

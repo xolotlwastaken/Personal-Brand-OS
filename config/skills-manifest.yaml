@@ -276,7 +276,7 @@
         "config/reference-requirements.lock",
         "pinned local faster-whisper-tiny model",
         "official-image FFmpeg",
-        "existing NVIDIA model credential for visual observations"
+        "profile Neuralwatt model credential for visual observations"
       ],
       "external_integrations": "bounded reference-acquisition native plugin; no login/cookies",
       "helper_review": "no executable helpers",
@@ -314,7 +314,7 @@
         "config/reference-requirements.lock",
         "pinned local faster-whisper-tiny model",
         "official-image FFmpeg",
-        "existing NVIDIA model credential for visual observations"
+        "profile Neuralwatt model credential for visual observations"
       ],
       "external_integrations": "bounded reference-acquisition native plugin; no login/cookies",
       "helper_review": "no executable helpers",
@@ -353,7 +353,7 @@
         "config/reference-requirements.lock",
         "pinned local faster-whisper-tiny model",
         "official-image FFmpeg",
-        "existing NVIDIA model credential for visual observations"
+        "profile Neuralwatt model credential for visual observations"
       ],
       "external_integrations": "bounded reference-acquisition native plugin; no login/cookies",
       "helper_review": "no executable helpers",
