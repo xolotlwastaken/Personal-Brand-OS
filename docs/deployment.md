@@ -73,7 +73,7 @@ Worker PIDs/leases from the old machine are not portable active processes. The n
 No remote Git repository was published by this setup. Transfer `backups/personal-brand-os.bundle` and the verified state archive through your chosen secure channel. On the new server:
 
 ```bash
-git clone /secure-transfer/personal-brand-os.bundle personal-brand-os
+git clone --branch main /secure-transfer/personal-brand-os.bundle personal-brand-os
 cd personal-brand-os
 docker compose pull
 ./scripts/restore.sh /secure-transfer/brand-os-20261009T011245Z-19807.tar.gz data/import
@@ -87,4 +87,4 @@ docker compose restart hermes
 ./scripts/verify.sh
 ```
 
-Use these move commands only in a fresh checkout with empty destinations, as described above. The bundle is sufficient to clone without a Git hosting account. Generate a new bundle after future commits with `git bundle create backups/personal-brand-os.bundle --all` and protect runtime backups separately.
+Use these move commands only in a fresh checkout with empty destinations, as described above. The bundle is sufficient to clone without a Git hosting account. Generate a new bundle after future commits with `git bundle create backups/personal-brand-os.bundle main` and protect runtime backups separately.

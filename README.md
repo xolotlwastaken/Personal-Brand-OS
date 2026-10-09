@@ -7,7 +7,7 @@ A portable content team: one official Hermes container, seven named persistent p
 Prerequisites: Docker Engine (or Desktop), Docker Compose v2+, Bash, Git, GNU coreutils, local disk. No host Hermes/Python installation is needed. Allow roughly 3 GB container RAM plus Docker overhead, two CPUs and several GB for the official image; media needs additional disk space. x86_64 is tested here; the pinned official index also publishes arm64, which has not been tested in this project.
 
 ```bash
-git clone <your-repository-url-or-transferred-Git-bundle> personal-brand-os
+git clone --branch main <your-repository-url-or-transferred-Git-bundle> personal-brand-os
 cd personal-brand-os
 ./scripts/bootstrap.sh
 ./scripts/credentials.sh nvidia    # hidden prompt for your MODEL API key
