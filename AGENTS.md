@@ -8,6 +8,6 @@ Configuration is version controlled; data/, knowledge/, media/, secrets and back
 
 Native Hermes Kanban is the only execution/task state engine. Use model-facing native tools or supported CLI commands, never direct SQL mutations or a custom queue. Deterministic test DBs are isolated and do not run inference. Label them separately from real dispatcher tests.
 
-No fabricated personal experiences, measurements or opinions. Synthetic fixtures stay synthetic. Publishing, DMs, scraping, media generation and rendering are disabled. Human approval is required for major strategy decisions and future external actions.
+No fabricated personal experiences, measurements or opinions. Synthetic fixtures stay synthetic. Reference Builder may use bounded native reference tools for public reference search, accessible single-video retrieval, local transcription, frame extraction and visual observations. No platform login/cookies or bulk scraping. Publishing, DMs, media generation and production rendering remain disabled. Human approval is required for major strategy decisions and future external actions beyond this authorized reference workflow.
 
 Verification: scripts/verify.sh; scripts/e2e.sh is bounded real inference and idempotent. Backups pause all writers, stage database and WAL together, and use SQLite backup. Restore only into empty directories. Do not touch the host's independent ~/.hermes installation.

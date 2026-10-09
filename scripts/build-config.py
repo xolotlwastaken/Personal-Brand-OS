@@ -101,3 +101,7 @@ Use kanban_create, kanban_list, kanban_show and parent links; never delegate_tas
  (path/'SOUL.md').write_text(soul)
 (root/'config/agents.json').write_text(json.dumps({p:{'role':r[0],'description':r[1],'owned':r[2],'skills':r[3].split(),'tools':['file','skills','memory']+(['kanban'] if p=='brand-ceo' else [])+(['brand-validation'] if p in {'brand-ceo','script-writer','video-editor'} else [])} for p,r in roles.items()},indent=2)+'\n')
 print('Generated 7 profile templates,',len(methods),'adapted skills,',sum(len(r[3].split()) for r in roles.values()),'assignments.')
+from reference_config import apply as apply_reference_config
+apply_reference_config(root)
+from ceo_config import apply as apply_ceo_config
+apply_ceo_config(root)

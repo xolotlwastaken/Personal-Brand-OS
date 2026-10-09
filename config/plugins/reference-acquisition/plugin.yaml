@@ -1,0 +1,9 @@
+name: reference-acquisition
+version: "1.0.0"
+description: "Bounded public reference search, single-video download, local transcription, sampled frames and visual observations. No login, publishing or messaging."
+author: Personal Brand OS
+provides_tools:
+  - brand_reference_search
+  - brand_reference_fetch
+  - brand_reference_prepare
+  - brand_reference_visual

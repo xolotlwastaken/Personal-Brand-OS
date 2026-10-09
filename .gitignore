@@ -1,11 +1,60 @@
+# Local deployment settings and environment backups (keep the public template).
 .env
 .env.*
+.envrc
+*.env
+*.env.*
 !.env.example
+
+# Private runtime state; versioned seeds live under templates/knowledge/.
 /data/
 /backups/
 /.upstream/
 /knowledge/
 /media/
+secrets/
+.secrets/
+credentials/
+*.key
+*.pem
+*.p12
+*.pfx
+*.bundle
+
+# Runtime databases, including SQLite journal and WAL sidecars.
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+
+# Python environments, caches and test reports.
 __pycache__/
-*.pyc
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+*.egg-info/
+
+# Generated dependencies/build output and local logs.
+node_modules/
+/build/
+/dist/
+/coverage/
 *.log
+
+# Editor and operating-system files.
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db

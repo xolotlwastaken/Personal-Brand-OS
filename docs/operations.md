@@ -2,7 +2,16 @@
 
 ## Chat and task graphs
 
-`./scripts/chat.sh` opens brand-ceo; `./scripts/chat.sh <profile>` opens a specialist. Supply actual experiment notes, goal, sources and missing constraints. Initial brand discovery belongs to Brand Manager; do not ask a script generator to invent personality or past results.
+Normally talk to brand-ceo through the dashboard's **Brand CEO** desk or `./scripts/chat.sh`.
+The CEO delegates discovery and strategy revisions to Brand Manager and relays the
+interview questions to you. Brand Manager prepares short question rounds as artifacts;
+dependent CEO follow-ups present them and wait for human answers. Answers resume the
+CEO, which commissions the next specialist round. A strategy proposal needs explicit
+human approval before canonical changes. Existing starting drafts are incomplete discovery.
+
+`./scripts/chat.sh <profile>` remains an optional specialist/operator interface. Supply
+actual experiment notes, goal, sources and missing constraints; do not ask a script
+generator to invent personality or past results.
 
 CEO should use kanban_create to make specialist contracts and real returned task IDs as parent links. Producing cards depend on producing cards, not an unfinished planning card. Complete planning once the graph exists; schedule a separate CEO review card downstream of the script. A CLI chat need not stay open: gateway native dispatcher continues ready cards. Automatic built-in triage decomposition is off; triage cards await deliberate CEO/operator action.
 

@@ -29,7 +29,7 @@ if a.mode in {'backup','secrets'}:
                 rel=f.relative_to(src)
                 if a.mode=='secrets':
                     if tree!='hermes' or not is_secret(rel):continue
-                elif skipped(rel) or is_secret(rel):continue
+                elif skipped(rel) or is_secret(rel) or (tree=='hermes' and rel.parts[0] in {'reference-runtime','reference-model'}):continue
                 target=stage/tree/rel;target.parent.mkdir(parents=True,exist_ok=True)
                 if a.mode=='backup' and f.suffix=='.db':
                     # Source is paused by backup.sh. Stage DB + WAL together, then use SQLite

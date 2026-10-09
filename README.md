@@ -1,6 +1,6 @@
 # Agentic Personal Brand OS
 
-A portable content team: one official Hermes container, seven named persistent profiles, native SQLite Kanban dispatch, private profile memory, and one shared Obsidian Markdown vault. The CEO coordinates six specialists. The initial workflow produces drafts and human-reviewable artifacts; social publishing, DMs, scraping, video generation and rendering are disabled.
+A portable content team: one official Hermes container, seven named persistent profiles, native SQLite Kanban dispatch, private profile memory, and one shared Obsidian Markdown vault. The CEO coordinates six specialists. Reference Builder can search and retrieve accessible public references. Outputs remain drafts; publishing, DMs, bulk scraping, video generation and production rendering are disabled.
 
 ## Start on Linux
 
@@ -14,10 +14,11 @@ cd personal-brand-os
 # Or: ./scripts/credentials.sh openrouter (also change model/provider/base URL in .env)
 docker compose restart hermes
 ./scripts/wait-healthy.sh
+./scripts/references.sh setup           # pinned reference tools + local speech model
 ./scripts/verify.sh
 ```
 
-Bootstrap creates `.env` from `.env.example` using your UID/GID. The current image is official Hermes **0.21.6**, index digest `sha256:9774f4f39a9bb8c2f68ce728ed5e99ddbad282163be56764afacf88ed952b784`, source revision `818c13be1dc4fd28987e1e881a9408224afd4535`. It preserves upstream entrypoint and s6 supervision. No ports are published and no Docker socket is mounted. Upstream starts an authenticated internal loopback API for its control plane; it is reachable only within this container. Dashboard and social adapters are unconfigured.
+Bootstrap creates `.env` from `.env.example` using your UID/GID. The current image is official Hermes **0.21.6**, index digest `sha256:9774f4f39a9bb8c2f68ce728ed5e99ddbad282163be56764afacf88ed952b784`, source revision `818c13be1dc4fd28987e1e881a9408224afd4535`. It preserves upstream entrypoint and s6 supervision. No ports are published and no Docker socket is mounted. Upstream starts an authenticated internal loopback API for its control plane; it is reachable only within this container. The upstream dashboard and social adapters are unconfigured. A separate local project dashboard is available below.
 
 The repository is committed locally, and a portable Git bundle is available under backups/personal-brand-os.bundle. The verified state archive and transfer commands are recorded in docs/verification-report.md and docs/deployment.md.
 
@@ -43,13 +44,61 @@ Ask the CEO for an outcome, supplied personal facts and useful source material. 
 
 The demo request is “Create a 45-second Instagram Reel about how I used AI to plan my personal brand.” It uses mock references. Since the user's actual planning steps/results were not supplied, the resulting script must stay a **hypothetical draft with missing personal details**, not a publishable autobiographical claim. Only Brand Manager, Reference Builder, Hook Writer, Script Writer and CEO participate in this demo.
 
+## Local agent dashboard
+
+```bash
+./scripts/dashboard.sh --background     # Linux systemd user service
+# Open http://127.0.0.1:8765
+./scripts/dashboard.sh --status
+./scripts/dashboard.sh --stop
+# Or run in a terminal: ./scripts/dashboard.sh
+```
+
+Talk mainly to **Brand CEO** in the dashboard. It coordinates specialists, including
+Brand Manager discovery interviews and strategy revisions, and brings their questions
+back to your CEO conversation. Existing brand notes are a starting draft, not a
+completed strategy. The CEO desk uses persistent native tasks and comments; responses
+arrive after dispatch. Strategy proposals still require your approval.
+
+For a streamed conversation, select **Live CEO chat → New direct chat**. Under
+**Your agents**, click an agent's name or **Chat & activity** to read its saved
+messages/tool results or chat with it directly. Direct replies stream live;
+worker transcripts refresh every two seconds as Hermes saves messages.
+
+Manage all seven profiles from a local dashboard: team status, native task board,
+CEO conversation, advanced brief submission, operator feedback, dependency/handoff inspection, worker logs,
+session transcripts/usage, skills and read-only vault previews. Delegated work goes through the existing
+native dispatcher. Completed cards remain drafts, with publishing and messaging disabled.
+Requires host Python 3.10+; no frontend package installation is needed.
+See [dashboard operations and verification](docs/dashboard.md).
+
+## Find and study reference Reels
+
+```bash
+./scripts/references.sh setup            # pinned project runtime + local speech model
+./scripts/chat.sh reference-builder
+# Ask: Find three public Instagram Reels about AI workflows. Retrieve accessible
+# references, prepare transcripts and sampled frames, inspect their visuals,
+# and save a sourced teardown with uncertainties. Do not infer virality from search rank.
+./scripts/verify-references.sh           # synthetic tests; no network/inference
+```
+
+Reference Builder has four native reference tools. It searches public web indexes,
+downloads individual accessible Instagram Reels/posts or YouTube videos without
+login/cookies, transcribes audio locally and extracts timestamped frames. Visual
+observations use the existing NVIDIA model credential and send only the sampled
+contact sheet to that provider. Defaults: up to three references per brief,
+180 seconds and 100 MiB per clip, up to 12 sampled frames. Platform restrictions
+can still prevent retrieval; failures remain explicit. See [reference operations,
+dependencies and test evidence](docs/references.md).
+
 ## Profiles and files
 
 | Profile | Owns | Adapted Ootto skills |
 |---|---|---|
 | brand-ceo | Coordination, reviews, analytics summaries | analytics-readout, content-audit, content-calendar |
 | brand-manager | Canonical brand strategy | ai-brain, audience-personas, positioning-audit, content-pillar-builder, series-planner, content-calendar |
-| reference-builder | Supplied-reference research | reel-analyzer, competitor-teardown, trend-spotter, comment-mining |
+| reference-builder | Public reference acquisition and evidence analysis | reel-analyzer, competitor-teardown, trend-spotter, comment-mining |
 | hook-writer | Spoken/on-screen hooks | going-viral, hook-mining, viral-hook-writer, ab-hook-tester |
 | script-writer | Reel scripts and shots | reel-scripter, b-roll-shot-list, cta-writer, on-screen-text-writer |
 | video-editor | Editing plans, test media | reel-builder, b-roll-shot-list, on-screen-text-writer, cover-thumbnail-brief |
@@ -71,7 +120,7 @@ data/hermes/                             persistent profiles, SQLite, skills, me
 docs/                                    architecture, agents, deployment, operations, troubleshooting
 ```
 
-The user's private initial brief lives in `knowledge/brand/starting-brief.md`, seeded from a versioned template. Templates deliberately contain the supplied project brief only; keep future private personal details in the ignored runtime vault. Skills are prompt playbooks, not installed platform integrations. See [skill review](docs/skills-review.md).
+The user's private initial brief lives in `knowledge/brand/starting-brief.md`, seeded from a versioned template. Templates deliberately contain the supplied project brief only; keep future private personal details in the ignored runtime vault. Skills describe procedures; installed native tools provide the reference integration. See [skill review](docs/skills-review.md).
 
 ## Stop, back up and move
 
@@ -87,4 +136,4 @@ docker compose up -d
 
 Backups exclude credential stores and logs by default, preserve committed SQLite WAL transactions, and restore only into an empty location. They still contain private content/history: protect them. For a separate secret archive use `./scripts/backup.sh --secrets`, encrypt it immediately, and transfer it through a secure channel. Never commit or publicly upload backups.
 
-Detailed instructions: [deployment](docs/deployment.md), [architecture](docs/architecture.md), [agents](docs/agents.md), [operations](docs/operations.md), [troubleshooting](docs/troubleshooting.md). Actual test evidence and limitations: [verification report](docs/verification-report.md).
+Detailed instructions: [deployment](docs/deployment.md), [architecture](docs/architecture.md), [agents](docs/agents.md), [operations](docs/operations.md), [troubleshooting](docs/troubleshooting.md). Actual test evidence and limitations: [verification report](docs/verification-report.md). Before publishing this repository, follow [GitHub preparation and first push](docs/github.md).

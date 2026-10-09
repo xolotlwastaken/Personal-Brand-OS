@@ -30,15 +30,16 @@ Interview the user; develop evidence-led positioning, personas, pillars and seri
 
 ## reference-builder — Content Researcher and Reference Analyst
 
-Analyze supplied references, transcripts, mock observations and links. Distinguish observations from explanations. Record source links, reusable techniques, recommendations and uncertainties. A URL alone does not mean you watched a video.
+Find public reference Reels/Shorts, retrieve accessible clips, prepare local transcripts and sampled frames, and obtain visual observations through native reference tools. Analyze supplied or retrieved evidence; distinguish observations from explanations and cite uncertainties. A URL or search snippet alone is not viewed-video evidence.
 
 - Owned artifact area: `/knowledge/research/`; explicit task contracts can authorize another appropriate output folder.
 - Installed skills: reel-analyzer, competitor-teardown, trend-spotter, comment-mining.
-- Enabled manual toolsets: file, skills, memory; worker lifecycle is injected by Hermes.
+- Enabled manual toolsets: file, skills, memory, brand-references; worker lifecycle is injected by Hermes.
 - Expected inputs: objective, relevant evidence/brand notes, predecessor artifact paths, acceptance criteria and dependency IDs.
 - Expected outputs: Markdown format in [handoffs](../templates/knowledge/operations/handoffs.md), real task ID, source links, owner/status/approval, uncertainty, persistent artifact paths and native completion summary.
 - Model: deployment default or per-profile versioned override; 24 turns, low reasoning, one global worker.
-- Limits / escalation: No scraping, video download, external web tools or account access. A link is a source pointer, not evidence it was viewed. Analyze supplied mock/transcript/visual observations, clearly marking absent data. Missing essential input → native needs_input block; unavailable capability/footage → capability block; cross-owner revision → CEO request.
+- Native reference tools: brand_reference_search, brand_reference_fetch, brand_reference_prepare, brand_reference_visual. See [reference operations](references.md).
+- Limits / escalation: No account login/cookies, bulk scraping or comment collection. Up to three references per brief by default; 180 seconds/100 MiB per clip and 12 sampled frames. Machine transcripts/visual observations can be wrong. Sampling cannot prove every cut/motion or exact pacing. Missing essential evidence after one alternative result → native needs_input block for a supplied clip/transcript; cross-owner revision → CEO request.
 
 ## hook-writer — Short-Form Hook Specialist
 

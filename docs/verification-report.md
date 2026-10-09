@@ -4,6 +4,13 @@
 
 The foundation is complete: one healthy official Hermes container, seven persistent named profiles, native CEO-driven Kanban orchestration, a shared vault and tested backup/migration scripts. All required infrastructure checks passed. The live six-card workflow, measured revision/re-review and all 29 skill assignments ran successfully. Draft content still requires human factual/creative review; social actions remain disabled. Docker Desktop was restarted after a workstation reboot, and native dispatch reclaimed a stale worker lease and resumed unfinished checks.
 
+Reference acquisition was subsequently authorized and added on the same date.
+See [reference verification](references.md) for its separate evidence: 27
+synthetic tests (88% coverage), native tool discovery/restrictions, actual public
+Instagram downloads, local machine transcription, 12 timestamped frames, real
+vision observations, cached repeats and dispatcher card `t_d1a9c972` with owner
+correction `t_386c590b`. The prior synthetic E2E below remains a distinct test.
+
 ## Inspected environment and pins
 
 - Ubuntu 26.04, amd64; Docker Desktop 4.94 / Engine 29.8.2, Compose 5.5.1. Approximately 14 GiB RAM and 854 GB free disk at initial inspection.

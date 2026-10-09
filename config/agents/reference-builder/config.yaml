@@ -8,27 +8,32 @@
     "cli": [
       "file",
       "skills",
-      "memory"
+      "memory",
+      "brand-references"
     ],
     "api_server": [
       "file",
       "skills",
-      "memory"
+      "memory",
+      "brand-references"
     ],
     "telegram": [
       "file",
       "skills",
-      "memory"
+      "memory",
+      "brand-references"
     ],
     "discord": [
       "file",
       "skills",
-      "memory"
+      "memory",
+      "brand-references"
     ],
     "slack": [
       "file",
       "skills",
-      "memory"
+      "memory",
+      "brand-references"
     ]
   },
   "agent": {
@@ -71,5 +76,10 @@
   "tool_loop_guardrails": {
     "non_interactive_hard_stop_enabled": true
   },
-  "_config_version": 50
+  "_config_version": 50,
+  "plugins": {
+    "enabled": [
+      "reference-acquisition"
+    ]
+  }
 }

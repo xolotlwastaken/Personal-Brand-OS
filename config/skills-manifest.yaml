@@ -266,14 +266,19 @@
       ],
       "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
       "original_sha256": "4bae0a578fd3299f2f4bd805c1c56eab7a9d2731ee0a0811c8dc9dcc8284cdfd",
-      "adapted_sha256": "af12e2afd853424e0e6bf1da9871dd48ded95310dde4f401388787d524937383",
+      "adapted_sha256": "5f20a0057604c8eaac20d5f1c855d6ffce43b6e42d057a5e5e819ac372c44692",
       "declared_dependencies": [
         "agent-reach"
       ],
       "runtime_dependencies": [
-        "Hermes file/skills/kanban tools"
+        "Hermes file/skills/kanban tools",
+        "reference-acquisition native plugin",
+        "config/reference-requirements.lock",
+        "pinned local faster-whisper-tiny model",
+        "official-image FFmpeg",
+        "existing NVIDIA model credential for visual observations"
       ],
-      "external_integrations": "disabled",
+      "external_integrations": "bounded reference-acquisition native plugin; no login/cookies",
       "helper_review": "no executable helpers",
       "validation": {
         "directory": "passed",
@@ -288,7 +293,8 @@
             "task_id": "t_f31cd66d",
             "artifact": "/knowledge/research/t_f31cd66d-skill-examples.md"
           }
-        ]
+        ],
+        "reference_acquisition": "passed: 27 synthetic checks (88% coverage), live native search/retrieval/transcript/frames/vision and cached repeats, real dispatcher t_d1a9c972 and owner correction t_386c590b; see docs/references.md"
       }
     },
     {
@@ -298,14 +304,19 @@
       ],
       "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
       "original_sha256": "f4fe0b1aab06c27b41a51676d96d8e61beda85be0e47a60c12439d8739914c4c",
-      "adapted_sha256": "680d24af5736aa3d65eac73242c59f2763ad373e0dc8d759d94ce32099a2e8b4",
+      "adapted_sha256": "39339da40984a356129695d4ac7489606f0345f34b98f915021c7c6696bd68b0",
       "declared_dependencies": [
         "agent-reach"
       ],
       "runtime_dependencies": [
-        "Hermes file/skills/kanban tools"
+        "Hermes file/skills/kanban tools",
+        "reference-acquisition native plugin",
+        "config/reference-requirements.lock",
+        "pinned local faster-whisper-tiny model",
+        "official-image FFmpeg",
+        "existing NVIDIA model credential for visual observations"
       ],
-      "external_integrations": "disabled",
+      "external_integrations": "bounded reference-acquisition native plugin; no login/cookies",
       "helper_review": "no executable helpers",
       "validation": {
         "directory": "passed",
@@ -320,7 +331,8 @@
             "task_id": "t_f31cd66d",
             "artifact": "/knowledge/research/t_f31cd66d-skill-examples.md"
           }
-        ]
+        ],
+        "reference_acquisition": "passed: 27 synthetic checks (88% coverage), live native search/retrieval/transcript/frames/vision and cached repeats, real dispatcher t_d1a9c972 and owner correction t_386c590b; see docs/references.md"
       }
     },
     {
@@ -330,15 +342,20 @@
       ],
       "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
       "original_sha256": "9b2c95b5061f8cb4b0acb9551160429adf33b63abca6214a5a1eb5fb998724ad",
-      "adapted_sha256": "692aa23bb30d9297c90ba1723b5a3c63f71694eb3c3ba7a6ccc8f55bb2f5672a",
+      "adapted_sha256": "08f1bb6200afff190b7efef947f4261a4518466965a8e53be555c2c358860d62",
       "declared_dependencies": [
         "Ootto MCP",
         "agent-reach"
       ],
       "runtime_dependencies": [
-        "Hermes file/skills/kanban tools"
+        "Hermes file/skills/kanban tools",
+        "reference-acquisition native plugin",
+        "config/reference-requirements.lock",
+        "pinned local faster-whisper-tiny model",
+        "official-image FFmpeg",
+        "existing NVIDIA model credential for visual observations"
       ],
-      "external_integrations": "disabled",
+      "external_integrations": "bounded reference-acquisition native plugin; no login/cookies",
       "helper_review": "no executable helpers",
       "validation": {
         "directory": "passed",
@@ -353,7 +370,8 @@
             "task_id": "t_f31cd66d",
             "artifact": "/knowledge/research/t_f31cd66d-skill-examples.md"
           }
-        ]
+        ],
+        "reference_acquisition": "passed: 27 synthetic checks (88% coverage), live native search/retrieval/transcript/frames/vision and cached repeats, real dispatcher t_d1a9c972 and owner correction t_386c590b; see docs/references.md"
       }
     },
     {
@@ -363,7 +381,7 @@
       ],
       "source_revision": "5263be7b209fee3f98a59ec185446b8144bca88f",
       "original_sha256": "c20be227fbce88401c8be097d67e21759dd80714e8c3ad12b817bb86210cdef0",
-      "adapted_sha256": "0f1595fddf6ddd10b22d8299bf0eb96cf7b622e3f9ec3dd3a2684e4db866a362",
+      "adapted_sha256": "c9dab5863263cb4c0b7120a7c44f73ddb51f8443c2d265eba7407a6ea1a4e790",
       "declared_dependencies": [
         "Ootto MCP"
       ],

@@ -30,6 +30,9 @@ os.environ.pop('HERMES_KANBAN_TASK')
 assert not names & {'terminal','process','send_message','delegate_task','cronjob','browser_navigate','image_generate','skill_hub'},names
 if profile=='brand-ceo':assert {'kanban_create','kanban_list'}<=names
 assert ('brand_artifact_check' in names)==('brand-validation' in role['tools']),names
+reference_tools={'brand_reference_search','brand_reference_fetch','brand_reference_prepare','brand_reference_visual'}
+assert (reference_tools <= names)==(profile=='reference-builder'),names
+if profile!='reference-builder':assert not names & reference_tools,names
 # Native file tools: actual authorized specialist write and cross-profile read.
 file=f'/knowledge/{role["owned"]}/verification-{profile}.md'
 content=f'---\nid: verification-{profile}\nowner: {profile}\nstatus: synthetic-test\n---\n# Shared vault access\nSynthetic permission test; no personal claims.\n'

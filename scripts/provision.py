@@ -55,6 +55,10 @@ for profile,role in roles.items():
     if 'brand-validation' in role['tools']:
         for f in (P/'config/plugins/artifact-validator').rglob('*'):
             if f.is_file():managed(dest/'plugins/artifact-validator'/f.relative_to(P/'config/plugins/artifact-validator'),f.read_bytes())
+    if 'brand-references' in role['tools']:
+        for f in (P/'config/plugins/reference-acquisition').rglob('*'):
+            if f.is_file() and '__pycache__' not in f.parts and f.suffix != '.pyc':
+                managed(dest/'plugins/reference-acquisition'/f.relative_to(P/'config/plugins/reference-acquisition'),f.read_bytes())
     for skill in role['skills']:
         source=P/'config/skills'/skill
         for f in source.rglob('*'):

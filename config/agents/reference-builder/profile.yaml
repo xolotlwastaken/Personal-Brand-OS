@@ -1,5 +1,5 @@
 {
-  "description": "Analyze supplied references, transcripts, mock observations and links. Distinguish observations from explanations. Record source links, reusable techniques, recommendations and uncertainties. A URL alone does not mean you watched a video.",
+  "description": "Find public reference Reels/Shorts with native brand_reference tools; retrieve accessible single videos, prepare machine transcripts and sampled frames, and obtain visual observations. Analyze supplied or retrieved evidence, cite sources and uncertainties. A search snippet or URL alone is not watched-video evidence.",
   "display_name": "Content Researcher and Reference Analyst",
   "description_auto": false
 }

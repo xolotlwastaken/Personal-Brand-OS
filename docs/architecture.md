@@ -33,7 +33,9 @@ Upstream creates a strong API key and an internal authenticated localhost API re
 
 Concurrent handoffs use unique task filenames, atomic native writes, prerequisite completion gates and one worker globally. Canonical notes have one role owner. Manual chats and human Obsidian edits should submit unique proposals while a worker is editing; native stale checks are not a cross-process transaction system. Future higher concurrency needs explicit write coordination before being enabled.
 
-Future extensions: audited read-only research APIs, supplied-footage FFmpeg/Remotion, then separately approved official social integrations with human gates. Preserve the current disabled defaults until each integration is tested and authorized.
+Reference Builder now enables the native reference-acquisition plugin: scoped public search, single accessible video retrieval, CPU transcription, sampled-frame extraction and a bounded vision request. Heavy dependencies live in /opt/data/reference-runtime, separately from Hermes's venv. The official image/entrypoint and native execution engine remain unchanged. See [reference boundaries](references.md).
+
+Future extensions: supplied-footage FFmpeg/Remotion production rendering, then separately approved official social integrations with human gates. Preserve disabled defaults until each integration is tested and authorized.
 
 ## Script quality checks
 

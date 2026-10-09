@@ -1,6 +1,9 @@
 name: artifact-validator
-version: "1.0.0"
-description: "Read-only local Markdown script word-count, timing and metadata checks. No network, shell, database writes or rendering."
+version: "1.1.0"
+description: "Read-only Markdown checks and scoped CEO handoff pairing through supported native Kanban tools. No network, shell or rendering."
 author: Personal Brand OS
 provides_tools:
   - brand_artifact_check
+provides_hooks:
+  - transform_tool_result
+  - pre_tool_call

@@ -10,3 +10,5 @@ docker compose exec -T --user hermes hermes /opt/hermes/.venv/bin/python /projec
 
 docker compose exec -T --user hermes hermes /opt/hermes/.venv/bin/python /project/scripts/verify-helper.py
 docker compose exec -T --user hermes hermes /opt/hermes/.venv/bin/python /project/scripts/verify-validator.py
+docker compose exec -T --user hermes hermes /opt/hermes/.venv/bin/python /project/scripts/verify-ceo-relay.py
+./scripts/verify-references.sh
